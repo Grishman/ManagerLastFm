@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">LastFmApp</string>
+    <string name="app_name" translatable="false">LastFmApp</string>
+    <!--Main screen strings-->
+    <string name="msg_no_saved_albums">No saved albums, please use search</string>
 </resources>

@@ -20,13 +20,13 @@ import java.util.concurrent.TimeUnit
  */
 val appModule = module {
     // single instance of HelloRepository
-    single { ApiRepo() }
+    single { ApiRepo(get()) }
 
     // provided web components
     single { createOkHttpClient() }
 
     // Fill property
-    single { createWebService<LastFmService>(get(), getProperty(SERVER_URL)) }
+    single { createWebService<LastFmService>(get(), SERVER_URL) }
 
     // MyViewModel ViewModel
     viewModel { MainScreenViewModel(get()) }
