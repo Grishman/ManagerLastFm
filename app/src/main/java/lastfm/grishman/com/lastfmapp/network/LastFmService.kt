@@ -1,6 +1,7 @@
 package lastfm.grishman.com.lastfmapp.network
 
 import io.reactivex.Flowable
+import lastfm.grishman.com.lastfmapp.model.SearchResult
 import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -16,7 +17,7 @@ interface LastFmService {
     fun searchArtist(
             @Query("artist") artist: String,
             @Query("format") format: String = "json"
-    ): Flowable<ResponseBody>
+    ): Flowable<SearchResult>
 
     //Get Artist's Top Albums
     @GET("?method=artist.gettopalbums")

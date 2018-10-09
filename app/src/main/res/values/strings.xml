@@ -2,4 +2,7 @@
     <string name="app_name" translatable="false">LastFmApp</string>
     <!--Main screen strings-->
     <string name="msg_no_saved_albums">No saved albums, please use search</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

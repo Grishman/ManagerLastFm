@@ -13,7 +13,7 @@ package lastfm.grishman.com.lastfmapp.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Json4Kotlin_Base (
+data class SearchResult (
 
 	@SerializedName("results") val results : Results
 )

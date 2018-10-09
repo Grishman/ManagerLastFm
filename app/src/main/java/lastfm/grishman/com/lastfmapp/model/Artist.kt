@@ -1,7 +1,5 @@
 package lastfm.grishman.com.lastfmapp.model
 
-import android.os.Parcel
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 /*
@@ -23,36 +21,4 @@ data class Artist(
         @SerializedName("url") val url: String,
         @SerializedName("streamable") val streamable: Int,
         @SerializedName("image") val image: List<Image> //fixme images
-) : Parcelable {
-    constructor(parcel: Parcel) : this(
-            parcel.readString(),
-            parcel.readInt(),
-            parcel.readString(),
-            parcel.readString(),
-            parcel.readInt())
-
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeString(name)
-        parcel.writeInt(listeners)
-        parcel.writeString(mbid)
-        parcel.writeString(url)
-        parcel.writeInt(streamable)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<Artist> {
-        override fun createFromParcel(parcel: Parcel): Artist {
-            return Artist(parcel)
-        }
-
-        override fun newArray(size: Int): Array<Artist?> {
-            return arrayOfNulls(size)
-        }
-    }
-
-
-}
+)
