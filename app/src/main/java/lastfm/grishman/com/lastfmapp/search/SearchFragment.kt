@@ -1,13 +1,12 @@
 package lastfm.grishman.com.lastfmapp.search
 
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import lastfm.grishman.com.lastfmapp.R
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class SearchFragment : Fragment() {
 
@@ -15,7 +14,7 @@ class SearchFragment : Fragment() {
         fun newInstance() = SearchFragment()
     }
 
-    private lateinit var viewModel: SearchViewModel
+    private val searchModel: SearchViewModel by viewModel()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -25,8 +24,10 @@ class SearchFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(SearchViewModel::class.java)
         // TODO: Use the ViewModel
+        searchModel.search("kiki")
+
+
     }
 
 }

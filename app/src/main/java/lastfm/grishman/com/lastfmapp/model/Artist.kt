@@ -15,10 +15,13 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 
 
 data class Artist(
-        @SerializedName("name") private val name: String,
+        @SerializedName("name") val name: String,
         @SerializedName("listeners") val listeners: Int,
         @SerializedName("mbid") val mbid: String,
         @SerializedName("url") val url: String,
         @SerializedName("streamable") val streamable: Int,
         @SerializedName("image") val image: List<Image> //fixme images
-)
+){
+
+}
+

@@ -6,6 +6,8 @@ import lastfm.grishman.com.lastfmapp.mainScreen.MainScreenViewModel
 import lastfm.grishman.com.lastfmapp.network.AddAPIKeyInterceptor
 import lastfm.grishman.com.lastfmapp.network.ApiRepo
 import lastfm.grishman.com.lastfmapp.network.LastFmService
+import lastfm.grishman.com.lastfmapp.search.SearchRepository
+import lastfm.grishman.com.lastfmapp.search.SearchViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.viewmodel.ext.koin.viewModel
@@ -22,6 +24,8 @@ val appModule = module {
     // single instance of HelloRepository
     single { ApiRepo(get()) }
 
+    single { SearchRepository(get()) }
+
     // provided web components
     single { createOkHttpClient() }
 
@@ -30,6 +34,8 @@ val appModule = module {
 
     // MyViewModel ViewModel
     viewModel { MainScreenViewModel(get()) }
+
+    viewModel { SearchViewModel(get()) }
 }
 
 //val remoteDatasourceModule = applicationContext {

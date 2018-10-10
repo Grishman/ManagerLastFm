@@ -3,10 +3,8 @@ package lastfm.grishman.com.lastfmapp.mainScreen
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
-import android.widget.TextView
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
@@ -37,9 +35,9 @@ class MainActivity : AppCompatActivity() {
                 .setPopExitAnim(R.anim.slide_out_right)
                 .build()
 
-        findViewById<TextView>(R.id.some_text)?.setOnClickListener {
-            navController.navigate(R.id.search_action, null, options)
-        }
+//        findViewById<TextView>(R.id.some_text)?.setOnClickListener {
+//            navController.navigate(R.id.search_action, null, options)
+//        }
     }
 
     override fun onStart() {
@@ -60,9 +58,10 @@ class MainActivity : AppCompatActivity() {
         // Have the NavHelper look for an action or destination matching the menu
         // item id and navigate there if found.
         // Otherwise, bubble up to the parent.
-        return NavigationUI.onNavDestinationSelected(item,
-                Navigation.findNavController(this, R.id.main_nav_host_fragment))
-                || super.onOptionsItemSelected(item)
+//        return NavigationUI.onNavDestinationSelected(item,
+//                Navigation.findNavController(this, R.id.main_nav_host_fragment))
+//                ||
+                return super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp() = findNavController(R.id.main_nav_host_fragment).navigateUp()

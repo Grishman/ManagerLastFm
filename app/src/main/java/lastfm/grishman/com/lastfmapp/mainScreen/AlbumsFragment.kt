@@ -4,6 +4,9 @@ package lastfm.grishman.com.lastfmapp.mainScreen
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.*
+import androidx.navigation.NavController
+import androidx.navigation.NavOptions
+import androidx.navigation.Navigation
 
 import lastfm.grishman.com.lastfmapp.R
 
@@ -18,6 +21,12 @@ private const val ARG_PARAM2 = "param2"
  */
 class AlbumsFragment : Fragment() {
 
+    private lateinit var navController: NavController
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
@@ -25,7 +34,32 @@ class AlbumsFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_albums, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.main_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.search_action -> {
+                val options = NavOptions.Builder()
+                        .setEnterAnim(R.anim.slide_in_right)
+                        .setExitAnim(R.anim.slide_out_left)
+                        .setPopEnterAnim(R.anim.slide_in_left)
+                        .setPopExitAnim(R.anim.slide_out_right)
+                        .build()
+
+//                view.findViewById<Button>(R.id.navigate_dest_bt)?.setOnClickListener {
+                //Navigation.createNavigateOnClickListener(R.id.settings_fragment2, null)
+//                NavigationUI.findNavController(this, R.id.my_nav_host_fragment)
+                navController.navigate(R.id.searchFragment, null, options)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
