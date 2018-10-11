@@ -42,7 +42,7 @@ class ArtistAdapter : RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    class ViewHolder(internal var binding: ItemArtistBinding) : RecyclerView.ViewHolder(item :ItemArtistBinding){
+    class ViewHolder(internal var binding: ItemArtistBinding) : RecyclerView.ViewHolder(binding.root){
 
     }
 }
