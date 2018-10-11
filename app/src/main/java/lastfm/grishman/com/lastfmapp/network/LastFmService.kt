@@ -1,6 +1,6 @@
 package lastfm.grishman.com.lastfmapp.network
 
-import io.reactivex.Flowable
+import io.reactivex.Single
 import lastfm.grishman.com.lastfmapp.model.SearchResult
 import okhttp3.ResponseBody
 import retrofit2.http.GET
@@ -17,7 +17,7 @@ interface LastFmService {
     fun searchArtist(
             @Query("artist") artist: String,
             @Query("format") format: String = "json"
-    ): Flowable<SearchResult>
+    ): Single<SearchResult>
 
     //Get Artist's Top Albums
     @GET("?method=artist.gettopalbums")
@@ -26,12 +26,12 @@ interface LastFmService {
             @Query("mbid") mbid: String,
             @Query("limit") limit: Int = 10,
             @Query("format") format: String = "json"
-    ): Flowable<ResponseBody>
+    ): Single<ResponseBody>
 
-    //Get Album Info
+    //Get Album details info
     @GET("?method=album.getinfo")
     fun getAlbumInfo(
             @Query("mbid") mbid: String,
             @Query("format") format: String = "json"
-    ): Flowable<ResponseBody>
+    ): Single<ResponseBody>
 }

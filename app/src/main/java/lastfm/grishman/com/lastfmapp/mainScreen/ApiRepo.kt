@@ -1,10 +1,11 @@
-package lastfm.grishman.com.lastfmapp.network
+package lastfm.grishman.com.lastfmapp.mainScreen
 
 import android.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import lastfm.grishman.com.lastfmapp.model.SearchResult
+import lastfm.grishman.com.lastfmapp.network.LastFmService
 
 class ApiRepo(private val api: LastFmService) {
 

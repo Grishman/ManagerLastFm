@@ -2,9 +2,9 @@ package lastfm.grishman.com.lastfmapp.di
 
 import lastfm.grishman.com.lastfmapp.BuildConfig
 import lastfm.grishman.com.lastfmapp.di.DatasourceProperties.SERVER_URL
+import lastfm.grishman.com.lastfmapp.mainScreen.ApiRepo
 import lastfm.grishman.com.lastfmapp.mainScreen.MainScreenViewModel
 import lastfm.grishman.com.lastfmapp.network.AddAPIKeyInterceptor
-import lastfm.grishman.com.lastfmapp.network.ApiRepo
 import lastfm.grishman.com.lastfmapp.network.LastFmService
 import lastfm.grishman.com.lastfmapp.search.SearchRepository
 import lastfm.grishman.com.lastfmapp.search.SearchViewModel
