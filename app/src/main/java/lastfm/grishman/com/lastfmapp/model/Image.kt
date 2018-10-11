@@ -15,8 +15,6 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 
 
 data class Image(
-
         @SerializedName("#text") val text: String,
-        @SerializedName("size")
-        val size: String
+        @SerializedName("size") val size: String
 )

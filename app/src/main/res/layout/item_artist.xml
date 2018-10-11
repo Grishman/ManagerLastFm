@@ -7,10 +7,13 @@
 -->
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="lastfm.grishman.com.lastfmapp.model.Artist" />
+
         <variable
             name="viewModel"
             type="lastfm.grishman.com.lastfmapp.model.Artist" />
@@ -49,7 +52,8 @@
             android:layout_height="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.99"
-            app:srcCompat="@drawable/ic_search_black_24dp" />
+            app:srcCompat="@drawable/ic_search_black_24dp"
+            bind:imageUrl="@{viewModel.image[0].text}" />
 
 
     </android.support.constraint.ConstraintLayout>

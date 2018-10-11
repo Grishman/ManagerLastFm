@@ -24,6 +24,8 @@ class SearchFragment : Fragment() {
 
     private val searchModel: SearchViewModel by viewModel()
 
+    private val adapter: ArtistAdapter = ArtistAdapter()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(false)
@@ -53,7 +55,7 @@ class SearchFragment : Fragment() {
     private fun initiateDataListener() {
         //Observe the outcome and update state of the screen  accordingly
         searchModel.searchOutcome.observe(this, Observer<Outcome<SearchResult>> { outcome ->
-            Timber.d("initiateDataListener: " + outcome.toString())
+            Timber.d("initiateDataListener: ${outcome.toString()}")
             when (outcome) {
 
                 is Outcome.Progress -> {
@@ -63,7 +65,7 @@ class SearchFragment : Fragment() {
 
                 is Outcome.Success -> {
                     Timber.d("initiateDataListener: Successfully loaded data")
-                    //adapter.setData(outcome.data)
+                    adapter.swapItems(outcome.data.results.artistMatches.artist)
                     progress.visibility = View.INVISIBLE
                 }
 
