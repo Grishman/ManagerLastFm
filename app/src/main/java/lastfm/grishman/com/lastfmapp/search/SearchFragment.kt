@@ -9,15 +9,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.search_fragment.*
 import lastfm.grishman.com.lastfmapp.R
+import lastfm.grishman.com.lastfmapp.model.Artist
 import lastfm.grishman.com.lastfmapp.model.SearchResult
 import lastfm.grishman.com.lastfmapp.network.Outcome
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.io.IOException
 
-class SearchFragment : Fragment() {
+class SearchFragment : Fragment(), ArtistSelectListener {
 
     companion object {
         fun newInstance() = SearchFragment()
@@ -25,7 +27,7 @@ class SearchFragment : Fragment() {
 
     private val searchModel: SearchViewModel by viewModel()
 
-    private val adapter: ArtistAdapter = ArtistAdapter()
+    private val adapter: ArtistAdapter = ArtistAdapter(this)//todo look another way
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -46,7 +48,7 @@ class SearchFragment : Fragment() {
             override fun onQueryTextChange(p0: String?): Boolean = false
         })
         recycler_artists.layoutManager = LinearLayoutManager(context)
-        recycler_artists.adapter=adapter
+        recycler_artists.adapter = adapter
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -54,6 +56,13 @@ class SearchFragment : Fragment() {
         // TODO: Use the ViewModel
         //searchModel.search("kiki")
     }
+
+    override fun onArtistSelected(artist: Artist) {
+        val args = Bundle()
+        args.putParcelable("artist",artist)
+        Navigation.createNavigateOnClickListener(R.id.action_searchFragment_to_topAlbumsFragment, args).onClick(this.view)
+    }
+
 
     private fun initiateDataListener() {
         //Observe the outcome and update state of the screen  accordingly

@@ -26,6 +26,25 @@
         android:id="@+id/searchFragment"
         android:name="lastfm.grishman.com.lastfmapp.search.SearchFragment"
         android:label="Search"
-        tools:layout="@layout/search_fragment" />
+        tools:layout="@layout/search_fragment">
+        <action
+            android:id="@+id/action_searchFragment_to_topAlbumsFragment"
+            app:destination="@id/topAlbumsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"  />
+    </fragment>
+
+    <fragment
+        android:id="@+id/topAlbumsFragment"
+        android:name="lastfm.grishman.com.lastfmapp.topAlbums.TopAlbumsFragment"
+        android:label="Top Albums"
+        tools:layout="@layout/top_albums_fragment">
+
+        <!--<argument-->
+            <!--android:name="artist"-->
+            <!--app:type="string" />-->
+    </fragment>
 
 </navigation>

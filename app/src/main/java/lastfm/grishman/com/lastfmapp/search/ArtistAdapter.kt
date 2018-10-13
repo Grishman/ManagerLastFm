@@ -14,10 +14,9 @@ import lastfm.grishman.com.lastfmapp.model.Artist
 /**
  * Adapter for artists.
  */
-class ArtistAdapter : RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
+class ArtistAdapter(val clickListener: ArtistSelectListener) : RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
 
     private var artists: List<Artist> = emptyList()
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val artistItemBinding = DataBindingUtil.inflate<ItemArtistBinding>(
@@ -30,6 +29,7 @@ class ArtistAdapter : RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.viewModel = artists[position]
+        holder.binding.item.setOnClickListener { clickListener.onArtistSelected(artists[position]) }
         holder.binding.executePendingBindings()
     }
 
@@ -42,7 +42,7 @@ class ArtistAdapter : RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    class ViewHolder(internal var binding: ItemArtistBinding) : RecyclerView.ViewHolder(binding.root){
+    class ViewHolder(internal var binding: ItemArtistBinding) : RecyclerView.ViewHolder(binding.root) {
 
     }
 }

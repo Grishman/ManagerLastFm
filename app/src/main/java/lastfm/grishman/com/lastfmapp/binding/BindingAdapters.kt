@@ -35,9 +35,12 @@ object BindingAdapters {
     @JvmStatic
     @BindingAdapter("imageUrl")
     fun loadImage(imageView: ImageView, url: String?) {
-        Picasso.get()
-                .load(url)
-                .placeholder(R.mipmap.ic_launcher)
-                .into(imageView)
+        //fixme
+        if (url?.isNotBlank()!!)
+            Picasso.get()
+                    .load(url)
+                    .placeholder(R.mipmap.ic_launcher)
+                    .into(imageView)
+
     }
 }

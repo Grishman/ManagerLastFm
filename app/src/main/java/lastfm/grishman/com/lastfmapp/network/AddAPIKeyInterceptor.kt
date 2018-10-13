@@ -12,6 +12,7 @@ class AddAPIKeyInterceptor(private val apiKey: String) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response = with(chain) {
         val url = request().url().newBuilder()
                 .addQueryParameter("api_key", apiKey)
+                .addQueryParameter("format", "json")
                 .build()
         proceed(request().newBuilder().url(url).build())
     }
