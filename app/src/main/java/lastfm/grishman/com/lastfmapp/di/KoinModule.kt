@@ -8,6 +8,8 @@ import lastfm.grishman.com.lastfmapp.network.AddAPIKeyInterceptor
 import lastfm.grishman.com.lastfmapp.network.LastFmService
 import lastfm.grishman.com.lastfmapp.search.SearchRepository
 import lastfm.grishman.com.lastfmapp.search.SearchViewModel
+import lastfm.grishman.com.lastfmapp.topAlbums.TopAlbumsRepository
+import lastfm.grishman.com.lastfmapp.topAlbums.TopAlbumsViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.viewmodel.ext.koin.viewModel
@@ -26,16 +28,22 @@ val appModule = module {
 
     single { SearchRepository(get()) }
 
+    single { TopAlbumsRepository(get()) }
+
     // provided web components
     single { createOkHttpClient() }
 
     // Fill property
     single { createWebService<LastFmService>(get(), SERVER_URL) }
 
-    // MyViewModel ViewModel
+    // Saved albums ViewModel
     viewModel { MainScreenViewModel(get()) }
 
+    //Search artist ViewModel
     viewModel { SearchViewModel(get()) }
+
+    //Top albums ViewModel
+    viewModel { TopAlbumsViewModel(get()) }
 }
 
 //val remoteDatasourceModule = applicationContext {

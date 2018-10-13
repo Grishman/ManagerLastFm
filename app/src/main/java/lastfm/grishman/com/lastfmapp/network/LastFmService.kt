@@ -2,6 +2,7 @@ package lastfm.grishman.com.lastfmapp.network
 
 import io.reactivex.Single
 import lastfm.grishman.com.lastfmapp.model.SearchResult
+import lastfm.grishman.com.lastfmapp.model.albums.TopAlbumsResponse
 import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -15,8 +16,7 @@ interface LastFmService {
     //Search artist by name
     @POST("?method=artist.search")
     fun searchArtist(
-            @Query("artist") artist: String,
-            @Query("format") format: String = "json"
+            @Query("artist") artist: String
     ): Single<SearchResult>
 
     //Get Artist's Top Albums
@@ -24,14 +24,12 @@ interface LastFmService {
     fun getTopAlbums(
             @Query("artist") artist: String,
             @Query("mbid") mbid: String,
-            @Query("limit") limit: Int = 10,
-            @Query("format") format: String = "json"
-    ): Single<ResponseBody>
+            @Query("limit") limit: Int = 10
+    ): Single<TopAlbumsResponse>
 
     //Get Album details info
     @GET("?method=album.getinfo")
     fun getAlbumInfo(
-            @Query("mbid") mbid: String,
-            @Query("format") format: String = "json"
+            @Query("mbid") mbid: String
     ): Single<ResponseBody>
 }
