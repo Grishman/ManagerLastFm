@@ -33,7 +33,7 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"  />
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -43,8 +43,28 @@
         tools:layout="@layout/top_albums_fragment">
 
         <!--<argument-->
-            <!--android:name="artist"-->
-            <!--app:type="string" />-->
+        <!--android:name="artist"-->
+        <!--app:type="string" />-->
+        <action
+            android:id="@+id/action_backToMain"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/albumsFragment"
+            app:popUpToInclusive="true" />
+
+        <!--Details fragment-->
+        <action
+            android:id="@+id/action_to_albumDetailFragment"
+            app:destination="@id/albumDetailFragment" />
     </fragment>
+
+    <fragment
+
+        android:id="@+id/albumDetailFragment"
+        android:name="lastfm.grishman.com.lastfmapp.albumDetails.AlbumDetailFragment"
+        android:label="Details"
+        tools:layout="@layout/album_detail_fragment" />
 
 </navigation>

@@ -4,10 +4,12 @@ import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.top_albums_fragment.*
 import lastfm.grishman.com.lastfmapp.R
 import lastfm.grishman.com.lastfmapp.model.Artist
@@ -20,9 +22,12 @@ import java.io.IOException
 
 
 class TopAlbumsFragment : Fragment(), AlbumSelectListener {
+
     override fun onAlbumSelected(album: Album) {
+        navController().navigate(R.id.action_to_albumDetailFragment)
     }
 
+    fun navController() = findNavController()
     private var artist: Artist? = null
 
 
@@ -36,7 +41,7 @@ class TopAlbumsFragment : Fragment(), AlbumSelectListener {
     private lateinit var gridLayoutManager: GridLayoutManager
 
     private val adapter: AlbumAdapter = AlbumAdapter(this)
-
+    private lateinit var recyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         gridLayoutManager = GridLayoutManager(context, 2)
@@ -46,8 +51,14 @@ class TopAlbumsFragment : Fragment(), AlbumSelectListener {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(false)
+        val view = inflater.inflate(R.layout.top_albums_fragment, container, false)
         initiateDataListener()
-        return inflater.inflate(R.layout.top_albums_fragment, container, false)
+        recyclerView = view.findViewById(R.id.recycler_albums)
+//        if (!recyclerView.layoutManager?.isAttachedToWindow!!) {
+            recyclerView.layoutManager = gridLayoutManager
+//        }
+
+        return view
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -58,7 +69,6 @@ class TopAlbumsFragment : Fragment(), AlbumSelectListener {
         super.onViewCreated(view, savedInstanceState)
         //hello.text = artist.toString()
         //init Recycler for albums
-        recycler_albums.layoutManager = gridLayoutManager
         val spacingInPixels = resources.getDimensionPixelSize(R.dimen.spacing)
         recycler_albums.addItemDecoration(SpacesItemDecoration(spacingInPixels))
         recycler_albums.adapter = adapter

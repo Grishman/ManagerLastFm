@@ -1,6 +1,8 @@
 package lastfm.grishman.com.lastfmapp.di
 
 import lastfm.grishman.com.lastfmapp.BuildConfig
+import lastfm.grishman.com.lastfmapp.albumDetails.AlbumDetailViewModel
+import lastfm.grishman.com.lastfmapp.albumDetails.DetailsRepository
 import lastfm.grishman.com.lastfmapp.di.DatasourceProperties.SERVER_URL
 import lastfm.grishman.com.lastfmapp.mainScreen.ApiRepo
 import lastfm.grishman.com.lastfmapp.mainScreen.MainScreenViewModel
@@ -30,6 +32,8 @@ val appModule = module {
 
     single { TopAlbumsRepository(get()) }
 
+    single { DetailsRepository(get()) }
+
     // provided web components
     single { createOkHttpClient() }
 
@@ -44,6 +48,9 @@ val appModule = module {
 
     //Top albums ViewModel
     viewModel { TopAlbumsViewModel(get()) }
+
+    //Album info ViewModel
+    viewModel { AlbumDetailViewModel(get()) }
 }
 
 //val remoteDatasourceModule = applicationContext {

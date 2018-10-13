@@ -2,8 +2,8 @@ package lastfm.grishman.com.lastfmapp.network
 
 import io.reactivex.Single
 import lastfm.grishman.com.lastfmapp.model.SearchResult
+import lastfm.grishman.com.lastfmapp.model.album.AlbumInfoResponse
 import lastfm.grishman.com.lastfmapp.model.albums.TopAlbumsResponse
-import okhttp3.ResponseBody
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
@@ -30,6 +30,8 @@ interface LastFmService {
     //Get Album details info
     @GET("?method=album.getinfo")
     fun getAlbumInfo(
+            @Query("artist") artist: String,
+            @Query("album") album: String,
             @Query("mbid") mbid: String
-    ): Single<ResponseBody>
+    ): Single<AlbumInfoResponse>
 }
