@@ -1,6 +1,7 @@
 package lastfm.grishman.com.lastfmapp.albumDetails
 
 import android.arch.lifecycle.Observer
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.album_detail_fragment.*
 import lastfm.grishman.com.lastfmapp.R
+import lastfm.grishman.com.lastfmapp.databinding.AlbumDetailFragmentBinding
 import lastfm.grishman.com.lastfmapp.model.album.DetailedAlbum
 import lastfm.grishman.com.lastfmapp.network.Outcome
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -23,10 +25,22 @@ class AlbumDetailFragment : Fragment() {
 
 
     private val viewModel: AlbumDetailViewModel by viewModel()
+    private lateinit var binding: AlbumDetailFragmentBinding
+
+    private val adapter: TracksAdapter = TracksAdapter()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+
+        val dataBinding = DataBindingUtil.inflate<AlbumDetailFragmentBinding>(
+                inflater,
+                R.layout.album_detail_fragment,
+                container,
+                false
+        )
+
         initiateDataListener()
-        return inflater.inflate(R.layout.album_detail_fragment, container, false)
+        binding = dataBinding
+        return dataBinding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -36,6 +50,8 @@ class AlbumDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //binding.viewModel=viewModel.searchOutcome.value.
+        recycler_tracks.adapter = adapter
 //        artist?.let {
         viewModel.search(
                 artistToSearch = "Kevin Gates",
@@ -59,8 +75,10 @@ class AlbumDetailFragment : Fragment() {
 
                 is Outcome.Success -> {
                     Timber.d("initiateDataListener: Successfully loaded data${outcome.data.tracks}")
+                    binding.viewModel = outcome.data
+                    adapter.swapItems(outcome.data.tracks.track)
                     progress.visibility = View.INVISIBLE
-                    testinfo.text = outcome.data.toString()
+//                    testinfo.text = outcome.data.toString()
                 }
 
                 is Outcome.Failure -> {

@@ -36,11 +36,13 @@ object BindingAdapters {
     @BindingAdapter("imageUrl")
     fun loadImage(imageView: ImageView, url: String?) {
         //fixme
-        if (url?.isNotBlank()!!)
+        url?.let {
+        if (it.isNotEmpty())
             Picasso.get()
-                    .load(url)
+                    .load(it)
                     .placeholder(R.mipmap.ic_launcher)
                     .into(imageView)
+        }
 
     }
 }

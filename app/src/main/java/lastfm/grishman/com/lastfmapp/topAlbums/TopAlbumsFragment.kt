@@ -27,7 +27,7 @@ class TopAlbumsFragment : Fragment(), AlbumSelectListener {
         navController().navigate(R.id.action_to_albumDetailFragment)
     }
 
-    fun navController() = findNavController()
+    private fun navController() = findNavController()
     private var artist: Artist? = null
 
 
@@ -55,8 +55,9 @@ class TopAlbumsFragment : Fragment(), AlbumSelectListener {
         initiateDataListener()
         recyclerView = view.findViewById(R.id.recycler_albums)
 //        if (!recyclerView.layoutManager?.isAttachedToWindow!!) {
-            recyclerView.layoutManager = gridLayoutManager
-//        }
+//        if (recyclerView.layoutManager==null && !recyclerView.isAttachedToWindow)
+//            recyclerView.layoutManager = gridLayoutManager
+////        }
 
         return view
     }
@@ -69,6 +70,7 @@ class TopAlbumsFragment : Fragment(), AlbumSelectListener {
         super.onViewCreated(view, savedInstanceState)
         //hello.text = artist.toString()
         //init Recycler for albums
+        //recycler_albums.layoutManager = gridLayoutManager
         val spacingInPixels = resources.getDimensionPixelSize(R.dimen.spacing)
         recycler_albums.addItemDecoration(SpacesItemDecoration(spacingInPixels))
         recycler_albums.adapter = adapter
