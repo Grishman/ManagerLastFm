@@ -1,13 +1,16 @@
 package lastfm.grishman.com.lastfmapp.mainScreen
 
+import android.arch.lifecycle.LiveData
 import android.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import lastfm.grishman.com.lastfmapp.db.AlbumDao
 import lastfm.grishman.com.lastfmapp.model.SearchResult
+import lastfm.grishman.com.lastfmapp.model.albums.Album
 import lastfm.grishman.com.lastfmapp.network.LastFmService
 
-class ApiRepo(private val api: LastFmService) {
+class ApiRepo(private val api: LastFmService, private val albumDao: AlbumDao) {
 
     val disposable: CompositeDisposable = CompositeDisposable()
     fun getGreat() {
@@ -21,6 +24,10 @@ class ApiRepo(private val api: LastFmService) {
                         )
         )
 
+    }
+
+     fun loadFromDb(): LiveData<List<Album>> {
+        return albumDao.getAll()
     }
 
 }

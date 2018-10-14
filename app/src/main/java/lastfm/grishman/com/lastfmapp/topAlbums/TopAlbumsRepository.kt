@@ -1,9 +1,11 @@
 package lastfm.grishman.com.lastfmapp.topAlbums
 
+import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
+import lastfm.grishman.com.lastfmapp.db.AlbumDao
 import lastfm.grishman.com.lastfmapp.extensions.addTo
 import lastfm.grishman.com.lastfmapp.extensions.failed
 import lastfm.grishman.com.lastfmapp.extensions.loading
@@ -13,7 +15,7 @@ import lastfm.grishman.com.lastfmapp.model.albums.TopAlbumsResponse
 import lastfm.grishman.com.lastfmapp.network.LastFmService
 import lastfm.grishman.com.lastfmapp.network.Outcome
 
-class TopAlbumsRepository(private val api: LastFmService) {
+class TopAlbumsRepository(private val api: LastFmService, private val albumDao: AlbumDao) {
 
     private val disposable: CompositeDisposable = CompositeDisposable()
 
@@ -34,6 +36,14 @@ class TopAlbumsRepository(private val api: LastFmService) {
 
     }
 
+    fun saveAlbumTest(album: Album) {
+        Completable.fromAction {
+            albumDao.saveAlbum(album)
+        }
+                .subscribeOn(Schedulers.io())
+                .subscribe()
+        //albumDao.saveAlbum(album)
+    }
 
     fun handleError(error: Throwable) {
         albumsResult.failed(error)

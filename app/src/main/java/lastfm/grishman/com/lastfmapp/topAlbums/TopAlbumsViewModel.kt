@@ -23,6 +23,10 @@ class TopAlbumsViewModel(private val repo: TopAlbumsRepository) : ViewModel() {
         repo.getTopAlbums(artistToSearch, mbid)
     }
 
+    fun saveAlbum(album: Album) {
+        repo.saveAlbumTest(album = album)
+    }
+
     override fun onCleared() {
         super.onCleared()
         //clear the disposables when the viewmodel is cleared

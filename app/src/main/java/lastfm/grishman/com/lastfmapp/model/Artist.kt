@@ -27,6 +27,8 @@ data class Artist(
         @SerializedName("streamable") val streamable: Int,
         @SerializedName("image") val image: @RawValue List<Image> //fixme images
 ) : Parcelable {
+    constructor(name: String, listeners: Int, mbid: String, url: String) : this(name, listeners, mbid, url, 0, emptyList())
+
     // does not show up in the response but set in post processing.
     lateinit var avatar: String
 }

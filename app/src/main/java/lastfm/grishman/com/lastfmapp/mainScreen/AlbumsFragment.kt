@@ -1,14 +1,19 @@
 package lastfm.grishman.com.lastfmapp.mainScreen
 
 
+import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.*
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
+import kotlinx.android.synthetic.main.fragment_albums.*
 
 import lastfm.grishman.com.lastfmapp.R
+import lastfm.grishman.com.lastfmapp.model.albums.Album
+import org.koin.android.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,6 +27,9 @@ private const val ARG_PARAM2 = "param2"
 class AlbumsFragment : Fragment() {
 
     private lateinit var navController: NavController
+
+    // Lazy Inject ViewModel
+    private val viewModel: MainScreenViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +45,11 @@ class AlbumsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
+        viewModel.getAlbums().observe(this, Observer<List<Album>>{
+            it?.let {
+                Timber.d("size of items is"+ it.size)
+                textDb.text="lol"}
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

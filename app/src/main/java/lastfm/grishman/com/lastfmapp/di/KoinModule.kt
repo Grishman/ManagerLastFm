@@ -1,8 +1,10 @@
 package lastfm.grishman.com.lastfmapp.di
 
+import android.arch.persistence.room.Room
 import lastfm.grishman.com.lastfmapp.BuildConfig
 import lastfm.grishman.com.lastfmapp.albumDetails.AlbumDetailViewModel
 import lastfm.grishman.com.lastfmapp.albumDetails.DetailsRepository
+import lastfm.grishman.com.lastfmapp.db.LastFmDb
 import lastfm.grishman.com.lastfmapp.di.DatasourceProperties.SERVER_URL
 import lastfm.grishman.com.lastfmapp.mainScreen.ApiRepo
 import lastfm.grishman.com.lastfmapp.mainScreen.MainScreenViewModel
@@ -12,8 +14,10 @@ import lastfm.grishman.com.lastfmapp.search.SearchRepository
 import lastfm.grishman.com.lastfmapp.search.SearchViewModel
 import lastfm.grishman.com.lastfmapp.topAlbums.TopAlbumsRepository
 import lastfm.grishman.com.lastfmapp.topAlbums.TopAlbumsViewModel
+import lastfm.grishman.com.lastfmapp.utils.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.android.ext.koin.androidApplication
 import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 import retrofit2.Retrofit
@@ -26,11 +30,11 @@ import java.util.concurrent.TimeUnit
  */
 val appModule = module {
     // single instance of HelloRepository
-    single { ApiRepo(get()) }
+    single { ApiRepo(get(), get<LastFmDb>().albumDao()) }
 
     single { SearchRepository(get()) }
 
-    single { TopAlbumsRepository(get()) }
+    single { TopAlbumsRepository(get(), get<LastFmDb>().albumDao()) }
 
     single { DetailsRepository(get()) }
 
@@ -40,6 +44,10 @@ val appModule = module {
     // Fill property
     single { createWebService<LastFmService>(get(), SERVER_URL) }
 
+    single(definition = {
+        Room.databaseBuilder(androidApplication(), LastFmDb::class.java, Constants.DB_NAME)
+                .build()
+    })
     // Saved albums ViewModel
     viewModel { MainScreenViewModel(get()) }
 

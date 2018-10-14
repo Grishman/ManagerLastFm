@@ -1,5 +1,6 @@
 package lastfm.grishman.com.lastfmapp.mainScreen
 
+import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
@@ -9,7 +10,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import lastfm.grishman.com.lastfmapp.R
+import lastfm.grishman.com.lastfmapp.model.albums.Album
 import org.koin.android.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,6 +38,9 @@ class MainActivity : AppCompatActivity() {
                 .setPopExitAnim(R.anim.slide_out_right)
                 .build()
 
+        viewModel.getAlbums().observe(this, Observer<List<Album>>{
+            it?.let { Timber.d("size of items is"+ it[0]) }
+        })
 //        findViewById<TextView>(R.id.some_text)?.setOnClickListener {
 //            navController.navigate(R.id.search_action, null, options)
 //        }
@@ -42,7 +48,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.getGreating()
+//        viewModel.getGreating()
+
     }
 
     private fun setupActionBar(navController: NavController) {

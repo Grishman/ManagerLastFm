@@ -22,6 +22,12 @@ import java.io.IOException
 
 
 class TopAlbumsFragment : Fragment(), AlbumSelectListener {
+    override fun onAlbumSaveAction(album: Album) {
+        //Save to db
+        viewModel.saveAlbum(album)
+        //navController().navigate(R.id.action_backToMain)
+
+    }
 
     override fun onAlbumSelected(album: Album) {
         navController().navigate(R.id.action_to_albumDetailFragment)
@@ -44,16 +50,16 @@ class TopAlbumsFragment : Fragment(), AlbumSelectListener {
     private lateinit var recyclerView: RecyclerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(false)
         gridLayoutManager = GridLayoutManager(context, 2)
         artist = arguments?.getParcelable<Artist>("artist")
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        setHasOptionsMenu(false)
         val view = inflater.inflate(R.layout.top_albums_fragment, container, false)
         initiateDataListener()
-        recyclerView = view.findViewById(R.id.recycler_albums)
+//        recyclerView = view.findViewById(R.id.recycler_albums)
 //        if (!recyclerView.layoutManager?.isAttachedToWindow!!) {
 //        if (recyclerView.layoutManager==null && !recyclerView.isAttachedToWindow)
 //            recyclerView.layoutManager = gridLayoutManager

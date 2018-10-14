@@ -29,6 +29,11 @@ class AlbumAdapter(val clickListener: AlbumSelectListener) : RecyclerView.Adapte
                 clickListener.onAlbumSelected(it)
             }
         }
+        artistItemBinding.actionSaveAlbum.setOnClickListener {
+            artistItemBinding.viewModel?.let {
+                clickListener.onAlbumSaveAction(it)
+            }
+        }
 
         return ViewHolder(artistItemBinding)
     }

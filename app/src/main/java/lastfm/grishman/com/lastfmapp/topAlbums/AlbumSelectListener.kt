@@ -7,4 +7,5 @@ import lastfm.grishman.com.lastfmapp.model.albums.Album
  */
 interface AlbumSelectListener {
     fun onAlbumSelected(album: Album)
+    fun onAlbumSaveAction(album: Album)
 }
