@@ -43,7 +43,7 @@ data class Album(
 
         @SerializedName("image")
         @Ignore
-        @ColumnInfo(name = "images")
+        //@ColumnInfo(name = "images")
         var image: List<Image>
 ) {
     //    constructor() : this()

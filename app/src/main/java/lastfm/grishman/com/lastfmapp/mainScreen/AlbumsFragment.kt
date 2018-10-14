@@ -12,6 +12,8 @@ import kotlinx.android.synthetic.main.fragment_albums.*
 
 import lastfm.grishman.com.lastfmapp.R
 import lastfm.grishman.com.lastfmapp.model.albums.Album
+import lastfm.grishman.com.lastfmapp.topAlbums.AlbumAdapter
+import lastfm.grishman.com.lastfmapp.topAlbums.AlbumSelectListener
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
@@ -24,13 +26,22 @@ private const val ARG_PARAM2 = "param2"
  * A simple [Fragment] subclass.
  *
  */
-class AlbumsFragment : Fragment() {
+class AlbumsFragment : Fragment(), AlbumSelectListener {
+    override fun onAlbumSelected(album: Album) {
+        //fixme open details
+        viewModel.removeAlbum(album)
+    }
+
+    override fun onAlbumSaveAction(album: Album) {
+        viewModel.removeAlbum(album)
+    }
 
     private lateinit var navController: NavController
 
     // Lazy Inject ViewModel
     private val viewModel: MainScreenViewModel by viewModel()
 
+    private val adapter: AlbumAdapter = AlbumAdapter(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -39,16 +50,20 @@ class AlbumsFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_albums, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        recycler_albums.adapter = adapter
         navController = Navigation.findNavController(view)
-        viewModel.getAlbums().observe(this, Observer<List<Album>>{
+        viewModel.getAlbums().observe(this, Observer<List<Album>> {
             it?.let {
-                Timber.d("size of items is"+ it.size)
-                textDb.text="lol"}
+                Timber.d("size of items is" + it.size)
+                textDb.text = "lol"
+                adapter.swapItems(it)
+            }
         })
     }
 

@@ -10,7 +10,11 @@ class MainScreenViewModel(private val repo: ApiRepo) : ViewModel() {
         repo.getGreat()
     }
 
-    fun getAlbums() :LiveData<List<Album>>{
+    fun getAlbums(): LiveData<List<Album>> {
         return repo.loadFromDb()
+    }
+
+    fun removeAlbum(album: Album) {
+        repo.removeAlbum(album)
     }
 }

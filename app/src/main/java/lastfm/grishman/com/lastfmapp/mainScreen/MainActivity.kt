@@ -1,6 +1,5 @@
 package lastfm.grishman.com.lastfmapp.mainScreen
 
-import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
@@ -10,14 +9,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import lastfm.grishman.com.lastfmapp.R
-import lastfm.grishman.com.lastfmapp.model.albums.Album
-import org.koin.android.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
     // Lazy Inject ViewModel
-    private val viewModel: MainScreenViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,9 +33,7 @@ class MainActivity : AppCompatActivity() {
                 .setPopExitAnim(R.anim.slide_out_right)
                 .build()
 
-        viewModel.getAlbums().observe(this, Observer<List<Album>>{
-            it?.let { Timber.d("size of items is"+ it[0]) }
-        })
+
 //        findViewById<TextView>(R.id.some_text)?.setOnClickListener {
 //            navController.navigate(R.id.search_action, null, options)
 //        }
@@ -68,7 +61,7 @@ class MainActivity : AppCompatActivity() {
 //        return NavigationUI.onNavDestinationSelected(item,
 //                Navigation.findNavController(this, R.id.main_nav_host_fragment))
 //                ||
-                return super.onOptionsItemSelected(item)
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onSupportNavigateUp() = findNavController(R.id.main_nav_host_fragment).navigateUp()
