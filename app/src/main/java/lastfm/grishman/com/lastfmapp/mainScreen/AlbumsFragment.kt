@@ -4,17 +4,15 @@ package lastfm.grishman.com.lastfmapp.mainScreen
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.fragment_albums.*
 import lastfm.grishman.com.lastfmapp.R
-import lastfm.grishman.com.lastfmapp.model.albums.Album
 import lastfm.grishman.com.lastfmapp.topAlbums.AlbumAdapter
-import lastfm.grishman.com.lastfmapp.topAlbums.AlbumSelectListener
+import lastfm.grishman.com.lastfmapp.topAlbums.AlbumSelectListener2
+import lastfm.grishman.com.lastfmapp.vo.ViewAlbum
 import org.koin.android.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,14 +23,14 @@ private const val ARG_PARAM2 = "param2"
  * A simple [Fragment] subclass.
  *
  */
-class AlbumsFragment : Fragment(), AlbumSelectListener {
-    override fun onAlbumSelected(album: Album) {
+class AlbumsFragment : Fragment(), AlbumSelectListener2 {
+    override fun onAlbumSelected(album: ViewAlbum) {
         //fixme open details
-        viewModel.removeAlbum(album)
+        //viewModel.removeAlbum(album)
     }
 
-    override fun onAlbumSaveAction(album: Album) {
-        viewModel.removeAlbum(album)
+    override fun onAlbumSaveAction(album: ViewAlbum) {
+        //viewModel.removeAlbum(album)
     }
 
     private lateinit var navController: NavController
@@ -57,13 +55,13 @@ class AlbumsFragment : Fragment(), AlbumSelectListener {
         super.onViewCreated(view, savedInstanceState)
         recycler_albums.adapter = adapter
         navController = Navigation.findNavController(view)
-        viewModel.getAlbums().observe(this, Observer<List<Album>> {
-            it?.let {
-                Timber.d("size of items is" + it.size)
-                textDb.text = "lol"
-                adapter.swapItems(it)
-            }
-        })
+//        viewModel.getAlbums().observe(this, Observer<List<Album>> {
+//            it?.let {
+//                Timber.d("size of items is" + it.size)
+//                textDb.text = "lol"
+//                adapter.swapItems(it)
+//            }
+//        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

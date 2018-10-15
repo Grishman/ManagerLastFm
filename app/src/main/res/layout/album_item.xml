@@ -10,13 +10,21 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!--<data>-->
+
+        <!--<import type="lastfm.grishman.com.lastfmapp.model.albums.Album" />-->
+
+        <!--<variable-->
+            <!--name="viewModel"-->
+            <!--type="lastfm.grishman.com.lastfmapp.model.albums.Album" />-->
+    <!--</data>-->
     <data>
 
-        <import type="lastfm.grishman.com.lastfmapp.model.albums.Album" />
+        <import type="lastfm.grishman.com.lastfmapp.vo.ViewAlbum" />
 
         <variable
             name="viewModel"
-            type="lastfm.grishman.com.lastfmapp.model.albums.Album" />
+            type="lastfm.grishman.com.lastfmapp.vo.ViewAlbum" />
     </data>
 
     <!--todo move to style-->
@@ -41,7 +49,7 @@
                 android:layout_height="100dp"
                 android:scaleType="centerInside"
                 app:layout_constraintTop_toTopOf="parent"
-                bind:imageUrl="@{viewModel.image[3].text}" />
+                bind:imageUrl="@{viewModel.imageUri}" />
 
             <TextView
                 android:id="@+id/album_name"
@@ -64,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@{`by `+viewModel.artist.name}"
+                android:text="@{`by `+viewModel.artist}"
                 app:layout_constraintStart_toStartOf="@id/album_name"
                 app:layout_constraintTop_toBottomOf="@id/album_name"
                 tools:text="Luca Brasi 3" />

@@ -1,9 +1,12 @@
 package lastfm.grishman.com.lastfmapp.model.albums
 
-import androidx.room.*
+import androidx.room.ColumnInfo
+import androidx.room.Embedded
+import androidx.room.Ignore
 import com.google.gson.annotations.SerializedName
 import lastfm.grishman.com.lastfmapp.model.Artist
 import lastfm.grishman.com.lastfmapp.model.Image
+import lastfm.grishman.com.lastfmapp.vo.ViewAlbum
 
 /*
 Copyright (c) 2018 Kotlin Data Classes Generated from JSON powered by http://www.json2kotlin.com
@@ -16,9 +19,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
-@Entity(tableName = "albums_table",
-        primaryKeys = ["id", "name"],
-        indices = [(Index("name"))])
+
 data class Album(
 //        @PrimaryKey(autoGenerate = true)
         var id: Long
@@ -37,6 +38,10 @@ data class Album(
     @field:SerializedName("url")
     @ColumnInfo(name = "url")
     var url: String = ""
+
+    @field:SerializedName("mbid")
+    @ColumnInfo(name = "mbid")
+    var mbid: String = ""
 
     @SerializedName("artist")
     @Ignore
@@ -57,5 +62,15 @@ data class Album(
 //            Any() as Artist,
 //            emptyList()
 //    )
+
+    @Ignore
+     fun convertAlbum(album: Album): ViewAlbum {
+        return ViewAlbum(
+                name = album.name,
+                mbid = album.mbid,
+                artist = album.artist.name,
+                imageUri = album.image[3].text
+        )
+    }
     //constructor() : this(id = 0, url = "", name = "", playCount = 0, artist = Artist("",0,"",""), image = emptyList())
 }

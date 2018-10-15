@@ -36,7 +36,7 @@ val appModule = module {
 
     single { TopAlbumsRepository(get(), get<LastFmDb>().albumDao()) }
 
-    single { DetailsRepository(get()) }
+    single { DetailsRepository(get(), get<LastFmDb>().detailsDao()) }
 
     // provided web components
     single { createOkHttpClient() }

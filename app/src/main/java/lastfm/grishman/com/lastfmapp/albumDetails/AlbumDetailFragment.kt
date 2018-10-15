@@ -76,7 +76,8 @@ class AlbumDetailFragment : Fragment() {
                 is Outcome.Success -> {
                     Timber.d("initiateDataListener: Successfully loaded data${outcome.data.tracks}")
                     binding.viewModel = outcome.data
-                    adapter.swapItems(outcome.data.tracks.track)
+                    //fixme
+                    outcome.data.tracks?.track?.let { adapter.swapItems(it) }
                     progress.visibility = View.INVISIBLE
 //                    testinfo.text = outcome.data.toString()
                 }

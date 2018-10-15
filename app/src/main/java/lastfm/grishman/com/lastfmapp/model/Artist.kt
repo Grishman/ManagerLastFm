@@ -3,6 +3,7 @@ package lastfm.grishman.com.lastfmapp.model
 import android.annotation.SuppressLint
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
 
@@ -30,6 +31,7 @@ data class Artist(
     constructor(name: String, listeners: Int, mbid: String, url: String) : this(name, listeners, mbid, url, 0, emptyList())
 
     // does not show up in the response but set in post processing.
+    @IgnoredOnParcel
     lateinit var avatar: String
 }
 

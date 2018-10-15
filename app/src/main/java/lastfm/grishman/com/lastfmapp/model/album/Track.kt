@@ -10,11 +10,23 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 package lastfm.grishman.com.lastfmapp.model.album
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.Index
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "tracks_table",
+        primaryKeys = ["track_id", "name"],
+        indices = [(Index("name"))])
 data class Track(
-
-        @SerializedName("name") val name: String,
-        @SerializedName("url") val url: String,
-        @SerializedName("duration") val duration: Int
+        @ColumnInfo(name = "track_id")
+        @Expose
+        val trackId: Long,
+        @SerializedName("name")
+        val name: String,
+        @SerializedName("url")
+        val url: String,
+        @SerializedName("duration")
+        val duration: Int
 )

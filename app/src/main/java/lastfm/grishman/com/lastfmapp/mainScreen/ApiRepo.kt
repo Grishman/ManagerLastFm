@@ -1,7 +1,6 @@
 package lastfm.grishman.com.lastfmapp.mainScreen
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -27,13 +26,13 @@ class ApiRepo(private val api: LastFmService, private val albumDao: AlbumDao) {
 
     }
 
-    fun loadFromDb(): LiveData<List<Album>> {
-        return albumDao.getAll()
-    }
+//    fun loadFromDb(): LiveData<List<Album>> {
+//        //return albumDao.getAll()
+//    }
 
     fun removeAlbum(album: Album) {
         Completable.fromAction {
-            albumDao.delete(album)
+            //albumDao.delete(album)
         }
                 .subscribeOn(Schedulers.io())
                 .subscribe()

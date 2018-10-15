@@ -13,23 +13,23 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.top_albums_fragment.*
 import lastfm.grishman.com.lastfmapp.R
 import lastfm.grishman.com.lastfmapp.model.Artist
-import lastfm.grishman.com.lastfmapp.model.albums.Album
 import lastfm.grishman.com.lastfmapp.network.Outcome
 import lastfm.grishman.com.lastfmapp.utils.SpacesItemDecoration
+import lastfm.grishman.com.lastfmapp.vo.ViewAlbum
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.io.IOException
 
 
-class TopAlbumsFragment : Fragment(), AlbumSelectListener {
-    override fun onAlbumSaveAction(album: Album) {
+class TopAlbumsFragment : Fragment(), AlbumSelectListener2 {
+    override fun onAlbumSaveAction(album: ViewAlbum) {
         //Save to db
         viewModel.saveAlbum(album)
         //navController().navigate(R.id.action_backToMain)
 
     }
 
-    override fun onAlbumSelected(album: Album) {
+    override fun onAlbumSelected(album: ViewAlbum) {
         navController().navigate(R.id.action_to_albumDetailFragment)
     }
 
@@ -88,7 +88,7 @@ class TopAlbumsFragment : Fragment(), AlbumSelectListener {
 
     private fun initiateDataListener() {
         //Observe the outcome and update state of the screen  accordingly
-        viewModel.searchOutcome.observe(this, Observer<Outcome<List<Album>>> { outcome ->
+        viewModel.searchOutcome2.observe(this, Observer<Outcome<List<ViewAlbum>>> { outcome ->
             Timber.d("initiateDataListener: ${outcome.toString()}")
             when (outcome) {
 

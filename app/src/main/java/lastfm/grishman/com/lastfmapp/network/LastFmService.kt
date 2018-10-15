@@ -5,7 +5,6 @@ import lastfm.grishman.com.lastfmapp.model.SearchResult
 import lastfm.grishman.com.lastfmapp.model.album.AlbumInfoResponse
 import lastfm.grishman.com.lastfmapp.model.albums.TopAlbumsResponse
 import retrofit2.http.GET
-import retrofit2.http.POST
 import retrofit2.http.Query
 
 /**
@@ -14,7 +13,7 @@ import retrofit2.http.Query
 interface LastFmService {
 
     //Search artist by name
-    @POST("?method=artist.search")
+    @GET("?method=artist.search")
     fun searchArtist(
             @Query("artist") artist: String
     ): Single<SearchResult>

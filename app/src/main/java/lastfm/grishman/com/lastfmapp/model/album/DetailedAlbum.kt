@@ -10,18 +10,35 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 package lastfm.grishman.com.lastfmapp.model.album
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.Index
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import lastfm.grishman.com.lastfmapp.model.Image
 
-data class DetailedAlbum (
+@Entity(tableName = "detailed_album_table",
+        primaryKeys = ["album_id", "name", "artist"],
+        indices = [(Index("album_id", "name"))])
+data class DetailedAlbum(
+        @ColumnInfo(name = "album_id")
+        @Expose
+        val albumId: Long,
+        @SerializedName("name") val name: String,
+        @SerializedName("artist") val artist: String,
+        @SerializedName("url") val url: String,
 
-		@SerializedName("name") val name : String,
-		@SerializedName("artist") val artist : String,
-		@SerializedName("url") val url : String,
-		@SerializedName("image") val image : List<Image>,
-		@SerializedName("listeners") val listeners : Int,
-		@SerializedName("playcount") val playcount : Int,
-		@SerializedName("tracks") val tracks : Tracks
+        @SerializedName("listeners") val listeners: Int,
+        @SerializedName("playcount") val playcount: Int
+        //@Relation(parentColumn = "album_id", entityColumn = "track_id")
+
 //		@SerializedName("tags") val tags : Tags,
 //		@SerializedName("wiki") val wiki : Wiki
-)
+){
+    @Ignore
+    @SerializedName("image") val image: List<Image> = emptyList()
+
+    @Ignore
+    @SerializedName("tracks") val tracks: Tracks? = null
+}
