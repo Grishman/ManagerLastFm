@@ -1,6 +1,6 @@
 package lastfm.grishman.com.lastfmapp.model.albums
 
-import android.arch.persistence.room.*
+import androidx.room.*
 import com.google.gson.annotations.SerializedName
 import lastfm.grishman.com.lastfmapp.model.Artist
 import lastfm.grishman.com.lastfmapp.model.Image
@@ -17,35 +17,38 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 For support, please feel free to contact me at https://www.linkedin.com/in/syedabsar */
 
 @Entity(tableName = "albums_table",
+        primaryKeys = ["id", "name"],
         indices = [(Index("name"))])
 data class Album(
-
-        @PrimaryKey(autoGenerate = true)
-        var id: Long ,
-
-        @SerializedName("name")
-//        @PrimaryKey
-        @ColumnInfo(name = "name")
-        public var name: String? = "",
-
-        @SerializedName("playcount")
-        @ColumnInfo(name = "playcount")
-        var playCount: Int = 0,
-
-        @field:SerializedName("url")
-        @ColumnInfo(name = "url")
-        var url: String = "",
-
-        @SerializedName("artist")
-        @Ignore
-        @ColumnInfo(name = "artist")
-        var artist: Artist,
-
-        @SerializedName("image")
-        @Ignore
-        //@ColumnInfo(name = "images")
-        var image: List<Image>
+//        @PrimaryKey(autoGenerate = true)
+        var id: Long
 ) {
+    @Ignore constructor() : this(0)
+
+    @SerializedName("name")
+//        @PrimaryKey
+    @ColumnInfo(name = "name")
+    var name: String = ""
+
+    @SerializedName("playcount")
+    @ColumnInfo(name = "playcount")
+    var playCount: Int = 0
+
+    @field:SerializedName("url")
+    @ColumnInfo(name = "url")
+    var url: String = ""
+
+    @SerializedName("artist")
+    @Ignore
+    @ColumnInfo(name = "artist")
+    @Embedded
+    var artist: Artist = Artist("", 0, "", "")
+
+    @SerializedName("image")
+    @Ignore
+    @ColumnInfo(name = "images")
+    @Embedded
+    val image: List<Image> = emptyList()
     //    constructor() : this()
 //    constructor() : this(0,
 //            "",
@@ -54,5 +57,5 @@ data class Album(
 //            Any() as Artist,
 //            emptyList()
 //    )
-    constructor() : this(id = 0, url = "", name = "", playCount = 0, artist = Artist("",0,"",""), image = emptyList())
+    //constructor() : this(id = 0, url = "", name = "", playCount = 0, artist = Artist("",0,"",""), image = emptyList())
 }

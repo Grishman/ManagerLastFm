@@ -1,7 +1,7 @@
 package lastfm.grishman.com.lastfmapp.db
 
-import android.arch.lifecycle.LiveData
-import android.arch.persistence.room.*
+import androidx.lifecycle.LiveData
+import androidx.room.*
 import lastfm.grishman.com.lastfmapp.model.albums.Album
 
 /**
@@ -19,6 +19,6 @@ interface AlbumDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveAlbum(album: Album)
 
-    @Query("SELECT * FROM albums_table")
+    @Query("SELECT DISTINCT * FROM albums_table")
     fun getAll(): LiveData<List<Album>>
 }

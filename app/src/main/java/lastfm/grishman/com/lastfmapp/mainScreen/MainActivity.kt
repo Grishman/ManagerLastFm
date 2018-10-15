@@ -1,8 +1,8 @@
 package lastfm.grishman.com.lastfmapp.mainScreen
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController

@@ -1,13 +1,13 @@
 package lastfm.grishman.com.lastfmapp.albumDetails
 
-import android.arch.lifecycle.Observer
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.album_detail_fragment.*
 import lastfm.grishman.com.lastfmapp.R
 import lastfm.grishman.com.lastfmapp.databinding.AlbumDetailFragmentBinding
@@ -24,7 +24,7 @@ class AlbumDetailFragment : Fragment() {
     }
 
 
-    private val viewModel: AlbumDetailViewModel by viewModel()
+    private val detailViewModel: AlbumDetailViewModel by viewModel()
     private lateinit var binding: AlbumDetailFragmentBinding
 
     private val adapter: TracksAdapter = TracksAdapter()
@@ -50,10 +50,10 @@ class AlbumDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //binding.viewModel=viewModel.searchOutcome.value.
+        //binding.detailViewModel=detailViewModel.searchOutcome.value.
         recycler_tracks.adapter = adapter
 //        artist?.let {
-        viewModel.search(
+        detailViewModel.search(
                 artistToSearch = "Kevin Gates",
                 albumName = "Islah (Deluxe)",
                 mbid = ""
@@ -64,12 +64,12 @@ class AlbumDetailFragment : Fragment() {
 
     private fun initiateDataListener() {
         //Observe the outcome and update state of the screen  accordingly
-        viewModel.searchOutcome.observe(this, Observer<Outcome<DetailedAlbum>> { outcome ->
+        detailViewModel.searchOutcome.observe(this, Observer<Outcome<DetailedAlbum>> { outcome ->
             Timber.d("initiateDataListener: ${outcome.toString()}")
             when (outcome) {
 
                 is Outcome.Progress -> {
-                    viewModel.isRefreshing.set(outcome.loading)
+                    detailViewModel.isRefreshing.set(outcome.loading)
                     progress.visibility = View.VISIBLE
                 }
 

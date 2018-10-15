@@ -3,10 +3,10 @@
  */
 package lastfm.grishman.com.lastfmapp.albumDetails
 
-import android.databinding.DataBindingUtil
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
 import lastfm.grishman.com.lastfmapp.R
 import lastfm.grishman.com.lastfmapp.databinding.TrackItemBinding
 import lastfm.grishman.com.lastfmapp.model.album.Track

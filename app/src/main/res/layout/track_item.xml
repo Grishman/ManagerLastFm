@@ -18,7 +18,7 @@
             type="lastfm.grishman.com.lastfmapp.model.album.Track" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -50,5 +50,5 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Money Long" />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

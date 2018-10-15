@@ -1,7 +1,7 @@
 package lastfm.grishman.com.lastfmapp.extensions
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.subjects.PublishSubject
 import lastfm.grishman.com.lastfmapp.network.Outcome

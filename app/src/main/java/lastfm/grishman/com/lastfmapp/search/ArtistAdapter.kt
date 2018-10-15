@@ -3,10 +3,10 @@
  */
 package lastfm.grishman.com.lastfmapp.search
 
-import android.databinding.DataBindingUtil
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
 import lastfm.grishman.com.lastfmapp.R
 import lastfm.grishman.com.lastfmapp.databinding.ItemArtistBinding
 import lastfm.grishman.com.lastfmapp.model.Artist
@@ -14,7 +14,7 @@ import lastfm.grishman.com.lastfmapp.model.Artist
 /**
  * Adapter for artists.
  */
-class ArtistAdapter(val clickListener: ArtistSelectListener) : RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
+class ArtistAdapter(private val clickListener: ArtistSelectListener) : RecyclerView.Adapter<ArtistAdapter.ViewHolder>() {
 
     private var artists: List<Artist> = emptyList()
 

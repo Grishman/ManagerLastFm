@@ -19,7 +19,7 @@
             type="lastfm.grishman.com.lastfmapp.model.Artist" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -57,5 +57,5 @@
             bind:imageUrl="@{viewModel.image[0].text}"/>
         <!--bind:imageUrl="@{viewModel.image[0].text}"-->
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

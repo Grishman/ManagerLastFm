@@ -1,6 +1,6 @@
 package lastfm.grishman.com.lastfmapp.di
 
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import lastfm.grishman.com.lastfmapp.BuildConfig
 import lastfm.grishman.com.lastfmapp.albumDetails.AlbumDetailViewModel
 import lastfm.grishman.com.lastfmapp.albumDetails.DetailsRepository

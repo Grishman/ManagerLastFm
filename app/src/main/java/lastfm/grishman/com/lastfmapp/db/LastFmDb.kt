@@ -1,7 +1,7 @@
 package lastfm.grishman.com.lastfmapp.db
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
+import androidx.room.Database
+import androidx.room.RoomDatabase
 import lastfm.grishman.com.lastfmapp.model.albums.Album
 
 /**
