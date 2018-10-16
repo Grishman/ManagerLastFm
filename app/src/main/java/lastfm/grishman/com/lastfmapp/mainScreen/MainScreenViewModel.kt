@@ -1,7 +1,8 @@
 package lastfm.grishman.com.lastfmapp.mainScreen
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import lastfm.grishman.com.lastfmapp.model.albums.Album
+import lastfm.grishman.com.lastfmapp.vo.ViewAlbum
 
 class MainScreenViewModel(private val repo: ApiRepo) : ViewModel() {
 
@@ -9,12 +10,11 @@ class MainScreenViewModel(private val repo: ApiRepo) : ViewModel() {
         repo.getGreat()
     }
 
-//    fun getAlbums(): LiveData<List<Album>> {
-//        //return repo.loadFromDb()
-//        return
-//    }
+    fun getAlbums(): LiveData<List<ViewAlbum>> {
+        return repo.loadFromDb()
+    }
 
-    fun removeAlbum(album: Album) {
+    fun removeAlbum(album: ViewAlbum) {
         repo.removeAlbum(album)
     }
 }

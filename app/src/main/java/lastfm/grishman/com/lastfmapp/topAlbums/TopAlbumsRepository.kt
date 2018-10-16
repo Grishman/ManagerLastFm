@@ -34,8 +34,8 @@ class TopAlbumsRepository(private val api: LastFmService, private val albumDao: 
         api.getTopAlbums(artist = artist, mbid = mbid)
                 //.map { mapApiToViewModel(it) }
                 .map {
-                    var resultList: List<ViewAlbum> = emptyList()
-                    it.topAlbums.album.forEachIndexed { index, album -> resultList[index].convertAlbum(album) }
+                    var resultList: MutableList<ViewAlbum> = mutableListOf<ViewAlbum>()
+                    it.topAlbums.album.forEachIndexed { index, album -> resultList?.add(index,album.convertAlbum(album))}
 //        resultList = it.topAlbums.album
                     return@map resultList
                 }
@@ -53,8 +53,8 @@ class TopAlbumsRepository(private val api: LastFmService, private val albumDao: 
 
     private fun mapApiToViewModel(response: TopAlbumsResponse) = Function<TopAlbumsResponse, List<ViewAlbum>> {
 
-        var resultList: MutableList<ViewAlbum> = mutableListOf()
-        it.topAlbums.album.forEachIndexed { index, album -> resultList[index].convertAlbum(album) }
+        var resultList: MutableList<ViewAlbum>?= mutableListOf<ViewAlbum>()
+        it.topAlbums.album.forEachIndexed { index, album -> resultList?.add(index,album.convertAlbum(album)) }
 //        resultList = it.topAlbums.album
         return@Function resultList
 
