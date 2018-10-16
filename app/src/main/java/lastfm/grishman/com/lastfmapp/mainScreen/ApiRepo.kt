@@ -7,11 +7,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import lastfm.grishman.com.lastfmapp.db.AlbumDao
+import lastfm.grishman.com.lastfmapp.db.AlbumWithTracksDao
 import lastfm.grishman.com.lastfmapp.model.SearchResult
 import lastfm.grishman.com.lastfmapp.network.LastFmService
 import lastfm.grishman.com.lastfmapp.vo.ViewAlbum
 
-class ApiRepo(private val api: LastFmService, private val albumDao: AlbumDao) {
+class ApiRepo(private val api: LastFmService, private val albumDao: AlbumDao,private val tracksDao: AlbumWithTracksDao) {
 
     val disposable: CompositeDisposable = CompositeDisposable()
     fun getGreat() {
@@ -28,6 +29,7 @@ class ApiRepo(private val api: LastFmService, private val albumDao: AlbumDao) {
     }
 
     fun loadFromDb(): LiveData<List<ViewAlbum>> {
+        //tracksDao.getAll().value
         return albumDao.getAll()
     }
 

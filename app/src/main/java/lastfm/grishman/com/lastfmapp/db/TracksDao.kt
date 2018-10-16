@@ -2,7 +2,7 @@ package lastfm.grishman.com.lastfmapp.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import lastfm.grishman.com.lastfmapp.model.album.Track
+import lastfm.grishman.com.lastfmapp.vo.ViewTracks
 
 /**
  * DAO for tracks.
@@ -11,14 +11,14 @@ import lastfm.grishman.com.lastfmapp.model.album.Track
 interface TracksDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun upsertAll(albums: List<Track>)
+    fun upsertAll(albums: List<ViewTracks>)
 
     @Delete
-    fun delete(album: Track)
+    fun delete(album: ViewTracks)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveTrack(album: Track)
+    fun saveTrack(album: ViewTracks)
 
     @Query("SELECT DISTINCT * FROM tracks_table")
-    fun getAll(): LiveData<List<Track>>
+    fun getAll(): LiveData<List<ViewTracks>>
 }

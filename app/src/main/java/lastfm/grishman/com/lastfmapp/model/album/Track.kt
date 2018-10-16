@@ -11,14 +11,11 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 package lastfm.grishman.com.lastfmapp.model.album
 
 import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.Index
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import lastfm.grishman.com.lastfmapp.vo.ViewTracks
 
-@Entity(tableName = "tracks_table",
-        primaryKeys = ["track_id", "name"],
-        indices = [(Index("name"))])
+
 data class Track(
         @ColumnInfo(name = "track_id")
         @Expose
@@ -29,4 +26,12 @@ data class Track(
         val url: String,
         @SerializedName("duration")
         val duration: Int
-)
+) {
+    fun convertTrack(): ViewTracks {
+        return ViewTracks(
+                name = this.name,
+                url = this.url,
+                duration = this.duration
+        )
+    }
+}

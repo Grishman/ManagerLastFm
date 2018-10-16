@@ -30,11 +30,11 @@ import java.util.concurrent.TimeUnit
  */
 val appModule = module {
     // single instance of HelloRepository
-    single { ApiRepo(get(), get<LastFmDb>().albumDao()) }
+    single { ApiRepo(get(), get<LastFmDb>().albumDao(),get<LastFmDb>().testDao()) }
 
     single { SearchRepository(get()) }
 
-    single { TopAlbumsRepository(get(), get<LastFmDb>().albumDao()) }
+    single { TopAlbumsRepository(get(), get<LastFmDb>().albumDao(),get<LastFmDb>().tracksDao()) }
 
     single { DetailsRepository(get(), get<LastFmDb>().detailsDao()) }
 

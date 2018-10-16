@@ -17,6 +17,8 @@ import androidx.room.Index
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 import lastfm.grishman.com.lastfmapp.model.Image
+import lastfm.grishman.com.lastfmapp.vo.ViewAlbum
+import lastfm.grishman.com.lastfmapp.vo.ViewTracks
 
 @Entity(tableName = "detailed_album_table",
         primaryKeys = ["album_id", "name", "artist"],
@@ -28,17 +30,41 @@ data class DetailedAlbum(
         @SerializedName("name") val name: String,
         @SerializedName("artist") val artist: String,
         @SerializedName("url") val url: String,
-
+        @field:SerializedName("mbid")
+        @ColumnInfo(name = "mbid")
+        val mbid: String?,
         @SerializedName("listeners") val listeners: Int,
         @SerializedName("playcount") val playcount: Int
         //@Relation(parentColumn = "album_id", entityColumn = "track_id")
 
 //		@SerializedName("tags") val tags : Tags,
 //		@SerializedName("wiki") val wiki : Wiki
-){
+) {
     @Ignore
-    @SerializedName("image") val image: List<Image> = emptyList()
+    @SerializedName("image")
+    val image: List<Image> = emptyList()
 
     @Ignore
-    @SerializedName("tracks") val tracks: Tracks? = null
+    @SerializedName("tracks")
+    val tracks: Tracks? = null
+
+    @Ignore
+    fun convertAlbum2(detailedAlbum: DetailedAlbum): ViewAlbum {
+        var model = ViewAlbum(
+                name = detailedAlbum.name,
+                mbid = detailedAlbum.mbid,
+                artist = detailedAlbum.artist,
+                imageUri = detailedAlbum.image[3].text
+
+        )
+        model.tracks = toViewTracks(detailedAlbum.tracks?.track).toMutableList()
+        return model
+    }
+
+    private fun toViewTracks(track: List<Track>?): List<ViewTracks> {
+        var resultList: MutableList<ViewTracks> = mutableListOf<ViewTracks>()
+        track?.forEachIndexed { index, album -> resultList.add(index, album.convertTrack()) }
+//        resultList = it.topAlbums.album
+        return resultList
+    }
 }

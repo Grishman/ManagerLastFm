@@ -6,7 +6,10 @@ import androidx.room.Ignore
 import com.google.gson.annotations.SerializedName
 import lastfm.grishman.com.lastfmapp.model.Artist
 import lastfm.grishman.com.lastfmapp.model.Image
+import lastfm.grishman.com.lastfmapp.model.album.DetailedAlbum
+import lastfm.grishman.com.lastfmapp.model.album.Track
 import lastfm.grishman.com.lastfmapp.vo.ViewAlbum
+import lastfm.grishman.com.lastfmapp.vo.ViewTracks
 
 /*
 Copyright (c) 2018 Kotlin Data Classes Generated from JSON powered by http://www.json2kotlin.com
@@ -64,13 +67,36 @@ data class Album(
 //    )
 
     @Ignore
-     fun convertAlbum(album: Album): ViewAlbum {
-        return ViewAlbum(
+    fun convertAlbum2(album: Album, detailedAlbum: DetailedAlbum): ViewAlbum {
+        var model = ViewAlbum(
                 name = album.name,
                 mbid = album.mbid,
                 artist = album.artist.name,
                 imageUri = album.image[3].text
+
         )
+        model.tracks = toViewTracks(detailedAlbum.tracks?.track).toMutableList()
+        return model
+    }
+
+    @Ignore
+    fun convertAlbum(album: Album): ViewAlbum {
+        var model = ViewAlbum(
+                name = album.name,
+                mbid = album.mbid,
+                artist = album.artist.name,
+                imageUri = album.image[3].text
+
+        )
+       // model.tracks = toViewTracks(detailedAlbum.tracks?.track).toMutableList()
+        return model
     }
     //constructor() : this(id = 0, url = "", name = "", playCount = 0, artist = Artist("",0,"",""), image = emptyList())
+}
+
+private fun toViewTracks(track: List<Track>?): List<ViewTracks> {
+    var resultList: MutableList<ViewTracks> = mutableListOf<ViewTracks>()
+    track?.forEachIndexed { index, album -> resultList.add(index, album.convertTrack()) }
+//        resultList = it.topAlbums.album
+    return resultList
 }
