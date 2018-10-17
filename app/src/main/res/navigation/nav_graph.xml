@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/albumsFragment"
-        android:name="lastfm.grishman.com.lastfmapp.mainScreen.AlbumsFragment"
+        android:name="lastfm.grishman.com.lastfmapp.ui.mainScreen.AlbumsFragment"
         android:label="Albums"
         tools:layout="@layout/fragment_albums">
 
@@ -24,7 +24,7 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="lastfm.grishman.com.lastfmapp.search.SearchFragment"
+        android:name="lastfm.grishman.com.lastfmapp.ui.search.SearchFragment"
         android:label="Search"
         tools:layout="@layout/search_fragment">
         <action
@@ -38,7 +38,7 @@
 
     <fragment
         android:id="@+id/topAlbumsFragment"
-        android:name="lastfm.grishman.com.lastfmapp.topAlbums.TopAlbumsFragment"
+        android:name="lastfm.grishman.com.lastfmapp.ui.topAlbums.TopAlbumsFragment"
         android:label="Top Albums"
         tools:layout="@layout/top_albums_fragment">
 
@@ -63,7 +63,7 @@
     <fragment
 
         android:id="@+id/albumDetailFragment"
-        android:name="lastfm.grishman.com.lastfmapp.albumDetails.AlbumDetailFragment"
+        android:name="lastfm.grishman.com.lastfmapp.ui.albumDetails.AlbumDetailFragment"
         android:label="Details"
         tools:layout="@layout/album_detail_fragment" />
 

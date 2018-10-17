@@ -1,4 +1,4 @@
-package lastfm.grishman.com.lastfmapp.search
+package lastfm.grishman.com.lastfmapp.ui.search
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

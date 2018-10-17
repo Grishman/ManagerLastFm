@@ -1,4 +1,4 @@
-package lastfm.grishman.com.lastfmapp.search
+package lastfm.grishman.com.lastfmapp.ui.search
 
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.LiveData

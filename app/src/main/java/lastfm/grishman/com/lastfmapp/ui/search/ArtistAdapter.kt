@@ -1,7 +1,7 @@
 /**
  * Copyright (C)
  */
-package lastfm.grishman.com.lastfmapp.search
+package lastfm.grishman.com.lastfmapp.ui.search
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

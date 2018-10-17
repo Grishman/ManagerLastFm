@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".mainScreen.MainActivity"
+            android:name="lastfm.grishman.com.lastfmapp.ui.mainScreen.MainActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

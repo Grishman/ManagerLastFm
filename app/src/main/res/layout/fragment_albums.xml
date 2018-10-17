@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
-    tools:context=".mainScreen.AlbumsFragment">
+    tools:context=".ui.mainScreen.AlbumsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_albums"

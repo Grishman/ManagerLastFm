@@ -1,4 +1,4 @@
-package lastfm.grishman.com.lastfmapp.search
+package lastfm.grishman.com.lastfmapp.ui.search
 
 import android.os.Bundle
 import android.view.LayoutInflater

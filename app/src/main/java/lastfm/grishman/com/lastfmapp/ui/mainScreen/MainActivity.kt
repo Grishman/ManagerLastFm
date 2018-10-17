@@ -1,4 +1,4 @@
-package lastfm.grishman.com.lastfmapp.mainScreen
+package lastfm.grishman.com.lastfmapp.ui.mainScreen
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

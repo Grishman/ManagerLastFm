@@ -1,4 +1,4 @@
-package lastfm.grishman.com.lastfmapp.albumDetails
+package lastfm.grishman.com.lastfmapp.ui.albumDetails
 
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers

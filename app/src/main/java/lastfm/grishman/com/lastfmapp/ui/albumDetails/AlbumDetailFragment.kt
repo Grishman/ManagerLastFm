@@ -1,4 +1,4 @@
-package lastfm.grishman.com.lastfmapp.albumDetails
+package lastfm.grishman.com.lastfmapp.ui.albumDetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +13,7 @@ import lastfm.grishman.com.lastfmapp.R
 import lastfm.grishman.com.lastfmapp.databinding.AlbumDetailFragmentBinding
 import lastfm.grishman.com.lastfmapp.model.album.DetailedAlbum
 import lastfm.grishman.com.lastfmapp.network.Outcome
-import lastfm.grishman.com.lastfmapp.topAlbums.TopAlbumsFragment
+import lastfm.grishman.com.lastfmapp.ui.topAlbums.TopAlbumsFragment
 import lastfm.grishman.com.lastfmapp.vo.ViewAlbum
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber

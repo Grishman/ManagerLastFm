@@ -1,4 +1,4 @@
-package lastfm.grishman.com.lastfmapp.topAlbums
+package lastfm.grishman.com.lastfmapp.ui.topAlbums
 
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.LiveData

@@ -1,4 +1,4 @@
-package lastfm.grishman.com.lastfmapp.topAlbums
+package lastfm.grishman.com.lastfmapp.ui.topAlbums
 
 import lastfm.grishman.com.lastfmapp.vo.ViewAlbum
 

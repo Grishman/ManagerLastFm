@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".topAlbums.TopAlbumsFragment">
+    tools:context=".ui.topAlbums.TopAlbumsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_albums"

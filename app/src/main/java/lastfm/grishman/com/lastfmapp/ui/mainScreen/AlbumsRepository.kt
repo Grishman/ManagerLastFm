@@ -1,4 +1,4 @@
-package lastfm.grishman.com.lastfmapp.mainScreen
+package lastfm.grishman.com.lastfmapp.ui.mainScreen
 
 import androidx.lifecycle.LiveData
 import io.reactivex.Completable

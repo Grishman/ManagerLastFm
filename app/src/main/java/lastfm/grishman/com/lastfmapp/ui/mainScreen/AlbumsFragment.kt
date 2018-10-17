@@ -1,4 +1,4 @@
-package lastfm.grishman.com.lastfmapp.mainScreen
+package lastfm.grishman.com.lastfmapp.ui.mainScreen
 
 
 import android.os.Bundle
@@ -10,8 +10,8 @@ import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import kotlinx.android.synthetic.main.fragment_albums.*
 import lastfm.grishman.com.lastfmapp.R
-import lastfm.grishman.com.lastfmapp.topAlbums.AlbumAdapter
-import lastfm.grishman.com.lastfmapp.topAlbums.AlbumSelectListener2
+import lastfm.grishman.com.lastfmapp.ui.topAlbums.AlbumAdapter
+import lastfm.grishman.com.lastfmapp.ui.topAlbums.AlbumSelectListener2
 import lastfm.grishman.com.lastfmapp.vo.ViewAlbum
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber

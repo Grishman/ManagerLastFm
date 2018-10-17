@@ -1,4 +1,4 @@
-package lastfm.grishman.com.lastfmapp.topAlbums
+package lastfm.grishman.com.lastfmapp.ui.topAlbums
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.top_albums_fragment.*
 import lastfm.grishman.com.lastfmapp.R
 import lastfm.grishman.com.lastfmapp.model.Artist
 import lastfm.grishman.com.lastfmapp.network.Outcome
-import lastfm.grishman.com.lastfmapp.search.SearchFragment
+import lastfm.grishman.com.lastfmapp.ui.search.SearchFragment
 import lastfm.grishman.com.lastfmapp.utils.SpacesItemDecoration
 import lastfm.grishman.com.lastfmapp.vo.ViewAlbum
 import org.koin.android.viewmodel.ext.android.viewModel

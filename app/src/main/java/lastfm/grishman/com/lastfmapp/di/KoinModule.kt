@@ -2,18 +2,18 @@ package lastfm.grishman.com.lastfmapp.di
 
 import androidx.room.Room
 import lastfm.grishman.com.lastfmapp.BuildConfig
-import lastfm.grishman.com.lastfmapp.albumDetails.AlbumDetailViewModel
-import lastfm.grishman.com.lastfmapp.albumDetails.DetailsRepository
 import lastfm.grishman.com.lastfmapp.db.LastFmDb
 import lastfm.grishman.com.lastfmapp.di.DatasourceProperties.SERVER_URL
-import lastfm.grishman.com.lastfmapp.mainScreen.AlbumsRepository
-import lastfm.grishman.com.lastfmapp.mainScreen.MainScreenViewModel
 import lastfm.grishman.com.lastfmapp.network.AddAPIKeyInterceptor
 import lastfm.grishman.com.lastfmapp.network.LastFmService
-import lastfm.grishman.com.lastfmapp.search.SearchRepository
-import lastfm.grishman.com.lastfmapp.search.SearchViewModel
-import lastfm.grishman.com.lastfmapp.topAlbums.TopAlbumsRepository
-import lastfm.grishman.com.lastfmapp.topAlbums.TopAlbumsViewModel
+import lastfm.grishman.com.lastfmapp.ui.albumDetails.AlbumDetailViewModel
+import lastfm.grishman.com.lastfmapp.ui.albumDetails.DetailsRepository
+import lastfm.grishman.com.lastfmapp.ui.mainScreen.AlbumsRepository
+import lastfm.grishman.com.lastfmapp.ui.mainScreen.MainScreenViewModel
+import lastfm.grishman.com.lastfmapp.ui.search.SearchRepository
+import lastfm.grishman.com.lastfmapp.ui.search.SearchViewModel
+import lastfm.grishman.com.lastfmapp.ui.topAlbums.TopAlbumsRepository
+import lastfm.grishman.com.lastfmapp.ui.topAlbums.TopAlbumsViewModel
 import lastfm.grishman.com.lastfmapp.utils.Constants
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -26,10 +26,10 @@ import retrofit2.converter.gson.GsonConverterFactory.create
 import java.util.concurrent.TimeUnit
 
 /**
- * DI stuff
+ * DI for the app.
  */
 val appModule = module {
-    // single instance of HelloRepository
+    // single instance of Repositories
     single { AlbumsRepository(get(), get<LastFmDb>().albumDao()) }
 
     single { SearchRepository(get()) }
@@ -38,16 +38,18 @@ val appModule = module {
 
     single { DetailsRepository(get(), get<LastFmDb>().detailsDao()) }
 
-    // provided web components
+    // provided OkHttp client.
     single { createOkHttpClient() }
 
-    // Fill property
+    // Create server API.
     single { createWebService<LastFmService>(get(), SERVER_URL) }
 
+    //Room DB
     single(definition = {
         Room.databaseBuilder(androidApplication(), LastFmDb::class.java, Constants.DB_NAME)
                 .build()
     })
+
     // Saved albums ViewModel
     viewModel { MainScreenViewModel(get()) }
 
@@ -60,14 +62,6 @@ val appModule = module {
     //Album info ViewModel
     viewModel { AlbumDetailViewModel(get()) }
 }
-
-//val remoteDatasourceModule = applicationContext {
-//    // provided web components
-//    bean { createOkHttpClient() }
-//
-//    // Fill property
-//    bean { createWebService<WeatherDatasource>(get(), getProperty(SERVER_URL)) }
-//}
 
 object DatasourceProperties {
     const val SERVER_URL = BuildConfig.BASE_API_URL

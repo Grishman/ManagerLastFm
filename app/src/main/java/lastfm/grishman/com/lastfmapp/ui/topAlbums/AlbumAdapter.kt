@@ -1,7 +1,7 @@
 /**
  * Copyright (C)
  */
-package lastfm.grishman.com.lastfmapp.topAlbums
+package lastfm.grishman.com.lastfmapp.ui.topAlbums
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
