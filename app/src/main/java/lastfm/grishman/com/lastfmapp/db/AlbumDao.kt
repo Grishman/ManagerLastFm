@@ -21,4 +21,7 @@ interface AlbumDao {
 
     @Query("SELECT DISTINCT * FROM albums_table")
     fun getAll(): LiveData<List<ViewAlbum>>
+
+    @Query("SELECT * FROM albums_table WHERE id=:id AND name=:name")
+    fun getAlbum(id: Long, name: String): LiveData<ViewAlbum>
 }

@@ -22,20 +22,25 @@ import java.io.IOException
 class AlbumDetailFragment : Fragment() {
 
     companion object {
-        fun newInstance() = AlbumDetailFragment()
+        const val FROM_DB: String = "FROM_DB"
     }
-
 
     private val detailViewModel: AlbumDetailViewModel by viewModel()
     private lateinit var binding: AlbumDetailFragmentBinding
+    private val adapter: TracksAdapter = TracksAdapter()
     private var album: ViewAlbum? = null
+
+    private var isFromDB = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        album = arguments?.getParcelable(TopAlbumsFragment.ALBUM_PARAM)
+        //Get params from extras.
+        arguments?.let {
+            album = it.getParcelable(TopAlbumsFragment.ALBUM_PARAM)
+            isFromDB = it.getBoolean(FROM_DB, false)
+        }
     }
 
-    private val adapter: TracksAdapter = TracksAdapter()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
@@ -53,14 +58,24 @@ class AlbumDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //
+        //todo add network checks
         recycler_tracks.adapter = adapter
-        album?.let {
-            detailViewModel.search(
-                    artistToSearch = it.artist,
-                    albumName = it.name,
-                    mbid = it.mbid
-            )
+        album?.let { it ->
+            if (isFromDB) {
+                //fetch from DB
+                detailViewModel.getDetailedAlbum(it).observe(
+                        this,
+                        Observer<ViewAlbum> {
+                            binding.viewModel = DetailedAlbum(it.name, it.artist, it.imageUri)
+                        }
+                )
+            } else {
+                detailViewModel.search(
+                        artistToSearch = it.artist,
+                        albumName = it.name,
+                        mbid = it.mbid
+                )
+            }
         }
 
     }

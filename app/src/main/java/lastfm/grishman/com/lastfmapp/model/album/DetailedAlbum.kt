@@ -36,9 +36,10 @@ data class DetailedAlbum(
 
 //		@SerializedName("tags") val tags : Tags,
 //		@SerializedName("wiki") val wiki : Wiki
-){
+) {
     @Ignore
-    @SerializedName("image") val image: List<Image> = emptyList()
+    @SerializedName("image")
+    val image: List<Image> = emptyList()
 
     // does not show up in the response but set in post processing.
     @IgnoredOnParcel
@@ -48,5 +49,11 @@ data class DetailedAlbum(
         get() = image.find { it.size == "large" }?.text ?: ""
 
     @Ignore
-    @SerializedName("tracks") val tracks: Tracks? = null
+    @SerializedName("tracks")
+    val tracks: Tracks? = null
+
+    @Ignore
+    constructor(name: String, artist: String, avatar: String) : this(0, name = name, artist = artist, url = "", listeners = 0, playcount = 0) {
+        this.avatar = avatar
+    }
 }

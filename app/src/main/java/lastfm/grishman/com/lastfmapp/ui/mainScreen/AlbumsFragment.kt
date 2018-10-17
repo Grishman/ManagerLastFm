@@ -8,18 +8,16 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_albums.*
 import lastfm.grishman.com.lastfmapp.R
+import lastfm.grishman.com.lastfmapp.ui.albumDetails.AlbumDetailFragment.Companion.FROM_DB
 import lastfm.grishman.com.lastfmapp.ui.topAlbums.AlbumAdapter
 import lastfm.grishman.com.lastfmapp.ui.topAlbums.AlbumSelectListener2
+import lastfm.grishman.com.lastfmapp.ui.topAlbums.TopAlbumsFragment
 import lastfm.grishman.com.lastfmapp.vo.ViewAlbum
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
-
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
@@ -28,7 +26,11 @@ private const val ARG_PARAM2 = "param2"
 class AlbumsFragment : Fragment(), AlbumSelectListener2 {
     override fun onAlbumSelected(album: ViewAlbum) {
         //fixme open details
-        //viewModel.removeAlbum(album)
+        val args = Bundle()
+        args.putParcelable(TopAlbumsFragment.ALBUM_PARAM, album)
+        args.putBoolean(FROM_DB, true)
+        navController().navigate(R.id.action_to_albumDetailFragment, args)
+
     }
 
     override fun onAlbumSaveAction(album: ViewAlbum) {
@@ -89,4 +91,6 @@ class AlbumsFragment : Fragment(), AlbumSelectListener2 {
         }
         return super.onOptionsItemSelected(item)
     }
+
+    private fun navController() = findNavController()
 }

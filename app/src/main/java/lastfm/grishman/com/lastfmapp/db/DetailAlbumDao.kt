@@ -17,7 +17,7 @@ interface DetailAlbumDao {
     fun delete(album: DetailedAlbum)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveTrack(album: DetailedAlbum)
+    fun saveAlbum(album: DetailedAlbum)
 
     @Query("SELECT DISTINCT * FROM detailed_album_table")
     fun getAll(): LiveData<List<DetailedAlbum>>

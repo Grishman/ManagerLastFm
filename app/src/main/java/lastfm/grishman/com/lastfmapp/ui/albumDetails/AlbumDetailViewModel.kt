@@ -7,6 +7,7 @@ import io.reactivex.disposables.CompositeDisposable
 import lastfm.grishman.com.lastfmapp.extensions.toLiveData
 import lastfm.grishman.com.lastfmapp.model.album.DetailedAlbum
 import lastfm.grishman.com.lastfmapp.network.Outcome
+import lastfm.grishman.com.lastfmapp.vo.ViewAlbum
 
 class AlbumDetailViewModel(private val repo: DetailsRepository) : ViewModel() {
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
@@ -20,7 +21,11 @@ class AlbumDetailViewModel(private val repo: DetailsRepository) : ViewModel() {
     //todo add getter with null checks
 
     fun search(artistToSearch: String, mbid: String?, albumName: String) {
-        repo.getAlbumInfo(artistToSearch, albumName, mbid?:"")
+        repo.getAlbumInfo(artistToSearch, albumName, mbid ?: "")
+    }
+
+    fun getDetailedAlbum(album: ViewAlbum): LiveData<ViewAlbum> {
+        return repo.loadFromDb(album.id, album.name)
     }
 
     override fun onCleared() {
