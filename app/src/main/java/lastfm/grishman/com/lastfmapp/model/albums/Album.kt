@@ -1,7 +1,5 @@
 package lastfm.grishman.com.lastfmapp.model.albums
 
-import androidx.room.ColumnInfo
-import androidx.room.Embedded
 import androidx.room.Ignore
 import com.google.gson.annotations.SerializedName
 import lastfm.grishman.com.lastfmapp.model.Artist
@@ -21,56 +19,34 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 
 
 data class Album(
-//        @PrimaryKey(autoGenerate = true)
         var id: Long
 ) {
-    @Ignore constructor() : this(0)
-
     @SerializedName("name")
-//        @PrimaryKey
-    @ColumnInfo(name = "name")
     var name: String = ""
 
     @SerializedName("playcount")
-    @ColumnInfo(name = "playcount")
     var playCount: Int = 0
 
     @field:SerializedName("url")
-    @ColumnInfo(name = "url")
     var url: String = ""
 
     @field:SerializedName("mbid")
-    @ColumnInfo(name = "mbid")
-    var mbid: String = ""
+    var mbid: String? = ""
 
     @SerializedName("artist")
-    @Ignore
-    @ColumnInfo(name = "artist")
-    @Embedded
     var artist: Artist = Artist("", 0, "", "")
 
     @SerializedName("image")
-    @Ignore
-    @ColumnInfo(name = "images")
-    @Embedded
     val image: List<Image> = emptyList()
-    //    constructor() : this()
-//    constructor() : this(0,
-//            "",
-//            0,
-//            "",
-//            Any() as Artist,
-//            emptyList()
-//    )
+
 
     @Ignore
-     fun convertAlbum(album: Album): ViewAlbum {
+    fun convertAlbum(album: Album): ViewAlbum {
         return ViewAlbum(
                 name = album.name,
                 mbid = album.mbid,
                 artist = album.artist.name,
-                imageUri = album.image[3].text
+                imageUri = album.image.find { image -> image.size == "large" }?.text ?: ""
         )
     }
-    //constructor() : this(id = 0, url = "", name = "", playCount = 0, artist = Artist("",0,"",""), image = emptyList())
 }

@@ -35,7 +35,7 @@ class TopAlbumsRepository(private val api: LastFmService, private val albumDao: 
                 //.map { mapApiToViewModel(it) }
                 .map {
                     var resultList: MutableList<ViewAlbum> = mutableListOf<ViewAlbum>()
-                    it.topAlbums.album.forEachIndexed { index, album -> resultList?.add(index,album.convertAlbum(album))}
+                    it.topAlbums.album.forEachIndexed { index, album -> resultList.add(index, album.convertAlbum(album)) }
 //        resultList = it.topAlbums.album
                     return@map resultList
                 }
@@ -53,8 +53,8 @@ class TopAlbumsRepository(private val api: LastFmService, private val albumDao: 
 
     private fun mapApiToViewModel(response: TopAlbumsResponse) = Function<TopAlbumsResponse, List<ViewAlbum>> {
 
-        var resultList: MutableList<ViewAlbum>?= mutableListOf<ViewAlbum>()
-        it.topAlbums.album.forEachIndexed { index, album -> resultList?.add(index,album.convertAlbum(album)) }
+        var resultList: MutableList<ViewAlbum>? = mutableListOf<ViewAlbum>()
+        it.topAlbums.album.forEachIndexed { index, album -> resultList?.add(index, album.convertAlbum(album)) }
 //        resultList = it.topAlbums.album
         return@Function resultList
 
@@ -70,6 +70,6 @@ class TopAlbumsRepository(private val api: LastFmService, private val albumDao: 
     }
 
     fun handleError(error: Throwable) {
-        albumsResult.failed(error)
+        albumsResultTest.failed(error)
     }
 }

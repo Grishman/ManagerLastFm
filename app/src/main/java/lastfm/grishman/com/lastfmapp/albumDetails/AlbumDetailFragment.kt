@@ -82,7 +82,6 @@ class AlbumDetailFragment : Fragment() {
                     //fixme
                     outcome.data.tracks?.track?.let { adapter.swapItems(it) }
                     progress.visibility = View.INVISIBLE
-//                    testinfo.text = outcome.data.toString()
                 }
 
                 is Outcome.Failure -> {

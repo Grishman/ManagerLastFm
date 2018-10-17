@@ -49,7 +49,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.99"
             app:srcCompat="@drawable/ic_search_black_24dp"
-            bind:imageUrl="@{viewModel.image[0].text}" />
+            bind:imageUrl="@{viewModel.avatar}"
+            android:contentDescription="Album image" />
 
         <!--<TextView-->
             <!--android:id="@+id/testinfo"-->

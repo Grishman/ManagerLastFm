@@ -16,6 +16,7 @@ import androidx.room.Ignore
 import androidx.room.Index
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.IgnoredOnParcel
 import lastfm.grishman.com.lastfmapp.model.Image
 
 @Entity(tableName = "detailed_album_table",
@@ -38,6 +39,13 @@ data class DetailedAlbum(
 ){
     @Ignore
     @SerializedName("image") val image: List<Image> = emptyList()
+
+    // does not show up in the response but set in post processing.
+    @IgnoredOnParcel
+    @Ignore
+    //fixme move to utils class
+    var avatar: String = ""
+        get() = image.find { it.size == "large" }?.text ?: ""
 
     @Ignore
     @SerializedName("tracks") val tracks: Tracks? = null

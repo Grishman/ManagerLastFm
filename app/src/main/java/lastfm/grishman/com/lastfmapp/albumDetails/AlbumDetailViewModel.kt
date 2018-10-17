@@ -19,8 +19,8 @@ class AlbumDetailViewModel(private val repo: DetailsRepository) : ViewModel() {
     }
     //todo add getter with null checks
 
-    fun search(artistToSearch: String, mbid: String, albumName: String) {
-        repo.getAlbumInfo(artistToSearch, albumName, mbid)
+    fun search(artistToSearch: String, mbid: String?, albumName: String) {
+        repo.getAlbumInfo(artistToSearch, albumName, mbid?:"")
     }
 
     override fun onCleared() {

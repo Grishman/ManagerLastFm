@@ -15,6 +15,7 @@ import lastfm.grishman.com.lastfmapp.R
 import lastfm.grishman.com.lastfmapp.model.Artist
 import lastfm.grishman.com.lastfmapp.model.SearchResult
 import lastfm.grishman.com.lastfmapp.network.Outcome
+import lastfm.grishman.com.lastfmapp.utils.MarginItemDecoration
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.io.IOException
@@ -48,6 +49,8 @@ class SearchFragment : Fragment(), ArtistSelectListener {
             override fun onQueryTextChange(p0: String?): Boolean = false
         })
         recycler_artists.layoutManager = LinearLayoutManager(context)
+        recycler_artists.addItemDecoration(MarginItemDecoration(
+                resources.getDimension(R.dimen.spacing).toInt()))
         recycler_artists.adapter = adapter
     }
 

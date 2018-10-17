@@ -17,11 +17,11 @@ import lastfm.grishman.com.lastfmapp.model.albums.Album
 @Parcelize
 data class ViewAlbum(val id: Long = 0L,
                      val name: String,
-                     val mbid: String,
+                     val mbid: String?="",
                      val artist: String,
                      @ColumnInfo(name = "image") val imageUri: String) : Parcelable {
     @Ignore
-    open fun convertAlbum(album: Album): ViewAlbum {
+    fun convertAlbum(album: Album): ViewAlbum {
         return ViewAlbum(
                 name = album.name,
                 mbid = album.mbid,

@@ -60,7 +60,11 @@ class AlbumsFragment : Fragment(), AlbumSelectListener2 {
         viewModel.getAlbums().observe(this, Observer<List<ViewAlbum>> {
             it?.let {
                 Timber.d("size of items is %s", it.size)
-                no_albums.visibility = View.GONE
+                if (it.isNotEmpty()) {
+                    no_albums.visibility = View.GONE
+                } else {
+                    no_albums.visibility = View.VISIBLE
+                }
                 adapter.swapItems(it)
             }
         })

@@ -32,6 +32,8 @@ data class Artist(
 
     // does not show up in the response but set in post processing.
     @IgnoredOnParcel
-    lateinit var avatar: String
+    //fixme move to utils class
+    var avatar: String = ""
+        get() = image.find { it.size == "large" }?.text ?: ""
 }
 
