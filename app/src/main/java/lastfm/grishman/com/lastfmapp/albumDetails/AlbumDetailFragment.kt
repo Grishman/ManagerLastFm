@@ -13,6 +13,8 @@ import lastfm.grishman.com.lastfmapp.R
 import lastfm.grishman.com.lastfmapp.databinding.AlbumDetailFragmentBinding
 import lastfm.grishman.com.lastfmapp.model.album.DetailedAlbum
 import lastfm.grishman.com.lastfmapp.network.Outcome
+import lastfm.grishman.com.lastfmapp.topAlbums.TopAlbumsFragment
+import lastfm.grishman.com.lastfmapp.vo.ViewAlbum
 import org.koin.android.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.io.IOException
@@ -26,6 +28,12 @@ class AlbumDetailFragment : Fragment() {
 
     private val detailViewModel: AlbumDetailViewModel by viewModel()
     private lateinit var binding: AlbumDetailFragmentBinding
+    private var album: ViewAlbum? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        album = arguments?.getParcelable(TopAlbumsFragment.ALBUM_PARAM)
+    }
 
     private val adapter: TracksAdapter = TracksAdapter()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -43,22 +51,17 @@ class AlbumDetailFragment : Fragment() {
         return dataBinding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //binding.detailViewModel=detailViewModel.searchOutcome.value.
+        //
         recycler_tracks.adapter = adapter
-//        artist?.let {
-        detailViewModel.search(
-                artistToSearch = "Kevin Gates",
-                albumName = "Islah (Deluxe)",
-                mbid = ""
-        )
-//        }
+        album?.let {
+            detailViewModel.search(
+                    artistToSearch = it.artist,
+                    albumName = it.name,
+                    mbid = it.mbid
+            )
+        }
 
     }
 

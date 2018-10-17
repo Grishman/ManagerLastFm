@@ -59,8 +59,8 @@ class AlbumsFragment : Fragment(), AlbumSelectListener2 {
         navController = Navigation.findNavController(view)
         viewModel.getAlbums().observe(this, Observer<List<ViewAlbum>> {
             it?.let {
-                Timber.d("size of items is" + it.size)
-                textDb.text = "lol"
+                Timber.d("size of items is %s", it.size)
+                no_albums.visibility = View.GONE
                 adapter.swapItems(it)
             }
         })
@@ -79,10 +79,6 @@ class AlbumsFragment : Fragment(), AlbumSelectListener2 {
                         .setPopEnterAnim(R.anim.slide_in_left)
                         .setPopExitAnim(R.anim.slide_out_right)
                         .build()
-
-//                view.findViewById<Button>(R.id.navigate_dest_bt)?.setOnClickListener {
-                //Navigation.createNavigateOnClickListener(R.id.settings_fragment2, null)
-//                NavigationUI.findNavController(this, R.id.my_nav_host_fragment)
                 navController.navigate(R.id.searchFragment, null, options)
                 return true
             }

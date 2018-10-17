@@ -6,7 +6,7 @@ import lastfm.grishman.com.lastfmapp.albumDetails.AlbumDetailViewModel
 import lastfm.grishman.com.lastfmapp.albumDetails.DetailsRepository
 import lastfm.grishman.com.lastfmapp.db.LastFmDb
 import lastfm.grishman.com.lastfmapp.di.DatasourceProperties.SERVER_URL
-import lastfm.grishman.com.lastfmapp.mainScreen.ApiRepo
+import lastfm.grishman.com.lastfmapp.mainScreen.AlbumsRepository
 import lastfm.grishman.com.lastfmapp.mainScreen.MainScreenViewModel
 import lastfm.grishman.com.lastfmapp.network.AddAPIKeyInterceptor
 import lastfm.grishman.com.lastfmapp.network.LastFmService
@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit
  */
 val appModule = module {
     // single instance of HelloRepository
-    single { ApiRepo(get(), get<LastFmDb>().albumDao()) }
+    single { AlbumsRepository(get(), get<LastFmDb>().albumDao()) }
 
     single { SearchRepository(get()) }
 

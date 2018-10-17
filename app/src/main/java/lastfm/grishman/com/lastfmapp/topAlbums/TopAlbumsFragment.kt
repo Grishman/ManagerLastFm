@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.top_albums_fragment.*
 import lastfm.grishman.com.lastfmapp.R
 import lastfm.grishman.com.lastfmapp.model.Artist
 import lastfm.grishman.com.lastfmapp.network.Outcome
+import lastfm.grishman.com.lastfmapp.search.SearchFragment
 import lastfm.grishman.com.lastfmapp.utils.SpacesItemDecoration
 import lastfm.grishman.com.lastfmapp.vo.ViewAlbum
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -22,6 +23,11 @@ import java.io.IOException
 
 
 class TopAlbumsFragment : Fragment(), AlbumSelectListener2 {
+
+    companion object {
+        const val ALBUM_PARAM: String = "ALBUM_PARAM"
+    }
+
     override fun onAlbumSaveAction(album: ViewAlbum) {
         //Save to db
         viewModel.saveAlbum(album)
@@ -30,17 +36,13 @@ class TopAlbumsFragment : Fragment(), AlbumSelectListener2 {
     }
 
     override fun onAlbumSelected(album: ViewAlbum) {
-        navController().navigate(R.id.action_to_albumDetailFragment)
+        val args = Bundle()
+        args.putParcelable(ALBUM_PARAM, album)
+        navController().navigate(R.id.action_to_albumDetailFragment, args)
     }
 
     private fun navController() = findNavController()
     private var artist: Artist? = null
-
-
-    companion object {
-        @JvmStatic
-        fun newInstance() = TopAlbumsFragment()
-    }
 
     private val viewModel: TopAlbumsViewModel by viewModel()
 
@@ -52,7 +54,7 @@ class TopAlbumsFragment : Fragment(), AlbumSelectListener2 {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(false)
         gridLayoutManager = GridLayoutManager(context, 2)
-        artist = arguments?.getParcelable<Artist>("artist")
+        artist = arguments?.getParcelable(SearchFragment.ARTIST_PARAM)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

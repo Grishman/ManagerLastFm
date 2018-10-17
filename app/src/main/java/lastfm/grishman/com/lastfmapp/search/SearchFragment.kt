@@ -22,7 +22,7 @@ import java.io.IOException
 class SearchFragment : Fragment(), ArtistSelectListener {
 
     companion object {
-        fun newInstance() = SearchFragment()
+        const val ARTIST_PARAM: String = "artist"
     }
 
     private val searchModel: SearchViewModel by viewModel()
@@ -51,15 +51,9 @@ class SearchFragment : Fragment(), ArtistSelectListener {
         recycler_artists.adapter = adapter
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        // TODO: Use the ViewModel
-        //searchModel.search("kiki")
-    }
-
     override fun onArtistSelected(artist: Artist) {
         val args = Bundle()
-        args.putParcelable("artist",artist)
+        args.putParcelable(ARTIST_PARAM, artist)
         Navigation.createNavigateOnClickListener(R.id.action_searchFragment_to_topAlbumsFragment, args).onClick(this.view)
     }
 
